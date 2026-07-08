@@ -66,3 +66,9 @@ body {
     margin-right: 10%;
     font-family:'Times New Roman', Times, serif;
 }
+
+.Tienda_Texto {
+    color:rgb(138, 145, 154);
+    font-size: 25px;
+    font-family:'Times New Roman', Times, serif;
+}
