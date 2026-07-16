@@ -21,6 +21,7 @@ body {
     background-color: url(img/back.jpg);
     font-family:'Times New Roman', Times, serif;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .M_Agendar{
@@ -30,6 +31,7 @@ body {
     background-color: rgb(138, 145, 154);
     font-family:'Times New Roman', Times, serif;
     font-size: 20px;
+    Cursor: pointer;
 }
 
 .Mid {
