@@ -1,0 +1,94 @@
+:root {
+/* menu y paneles */
+    --fondo-principal: #faf6f0;
+    --tarjetas: #f3e1e1;
+    --Iconos-lujo: #d4af37;
+    --fondo: #efe6dd;
+
+/* boton suave */
+    --fondo-suave:#e2d0c8;
+    --borde-suave: #d8c0b5;
+    --hover-suave: #d0a9a4;
+
+/* texto */ 
+    --texto: #3a2e2b;
+    --texto-secundario:#92817a;
+
+/* demas */
+
+
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+     background-color: var(--fondo-principal);
+}
+
+.menu_header {
+    background-color: var(--fondo);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.registro_header {
+    display: flex;
+    margin-left: 10px;
+    font-size: 20px;
+    background-color: var(--fondo-suave);
+    color: var(--texto);
+    border: 0;
+    border-radius: 5px;
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.registro_header:hover {
+    background-color: var(--hover-suave);
+    
+}
+
+.titulo_header {
+    font-size: 27px;
+    color: var(--texto-secundario);
+
+}
+
+.inicio_sesion {
+    display: flex;
+    margin-right: 10px;
+    font-size: 20px;
+    background-color: var(--fondo-suave);
+    border: 1px solid var(--borde-suave);
+    border-radius: 5px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: pointer;
+    color: var(--texto);
+}
+
+.inicio_sesion:hover {
+    background-color: var(--hover-suave);
+    
+}
+
+.mid_main {
+    display: grid;
+    grid-template-columns: 2, 1fr;
+    gap: 5px;
+
+}
+
+
+
