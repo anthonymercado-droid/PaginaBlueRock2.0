@@ -47,9 +47,36 @@ header{
     transition:.3s;
 }
 
-.login{
+.btn-header a,
+.btn-header a:hover,
+.btn-header a:active {
+    color: #6B3D49;
+    border-bottom: none;
+    text-decoration: none;
+}
+
+
+.btn-login{
+    padding:14px 28px;
     background:#7B4E57;
+    border:2px solid #8D6670;
+    border-radius:12px;
+    font-size:18px;
     color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-login:hover {
+    transform:translateY(-3px);
+}
+
+.btn-login a,
+.btn-login a:hover,
+.btn-login a:active {
+    color: white;
+    border-bottom: none;
+    text-decoration: none;
 }
 
 .btn-header:hover{
@@ -88,11 +115,11 @@ header{
 }
 
 .img1{
-    background-image:url(img/back.jpg);
+    background-image:url(img/izquierda.jpg);
 }
 
 .img2{
-    background-image:url(img/productos.jpg);
+    background-image:url(img/Derecha.jpg);
 }
 
 .icono{
