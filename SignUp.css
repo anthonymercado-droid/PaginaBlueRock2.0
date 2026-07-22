@@ -1,18 +1,44 @@
 :root {
-    --rojo-brand: #d32f2f;
-    --amarillo-brand: #fbc02d;
-    --gris-fondo: #f5f5f5;
+    --rojo-brand: #6B3D49;
+    --amarillo-brand: #7B4E57;
+    --gris-fondo: #F8F2EF;
     --blanco: #ffffff;
-    --texto-oscuro: #212121;
-    --texto-mutado: #666666;
+    --texto-oscuro: #4A2F37;
+    --texto-mutado: #8D6670;
     --borde-radio: 12px;
 }
+
+/* =========================
+        RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* =========================
+        BODY
+========================= */
+
+body {
+    background-color: var(--gris-fondo);
+    color: var(--texto-oscuro);
+}
+
+/* =========================
+        HEADER
+========================= */
 
 header{
     width:90%;
     margin:auto;
     padding:30px 0;
 
+    display:flex;
+    justify-content:center;
     align-items:center;
 }
 
@@ -22,10 +48,9 @@ header{
 
 .logo a,
 .logo a:hover,
-.logo a:active {
-    color: #6B3D49;
-    border-bottom: none;
-    text-decoration: none;
+.logo a:active{
+    color:#6B3D49;
+    text-decoration:none;
 }
 
 .titulo-logo{
@@ -35,19 +60,15 @@ header{
     border: 0;
 }
 
-.titulo-logo a,
-.titulo-logo a:hover,
-.titulo-logo a:active {
-    color: #6B3D49;
-    border-bottom: none;
-    text-decoration: none;
-}
-
 .logo p{
     letter-spacing:5px;
     color:#8D6670;
     font-size:14px;
 }
+
+/* =========================
+    BOTONES HEADER
+========================= */
 
 .btn-header{
     padding:14px 28px;
@@ -55,19 +76,18 @@ header{
     background:transparent;
     border-radius:12px;
     font-size:18px;
-    color:#6B3D49;
     cursor:pointer;
     transition:.3s;
 }
 
-.btn-header a,
-.btn-header a:hover,
-.btn-header a:active {
-    color: #6B3D49;
-    border-bottom: none;
-    text-decoration: none;
+.btn-header:hover{
+    transform:translateY(-3px);
 }
 
+.btn-header a{
+    color:#6B3D49;
+    text-decoration:none;
+}
 
 .btn-login{
     padding:14px 28px;
@@ -75,144 +95,127 @@ header{
     border:2px solid #8D6670;
     border-radius:12px;
     font-size:18px;
-    color:white;
     cursor:pointer;
     transition:.3s;
 }
 
-.btn-login:hover {
+.btn-login:hover{
     transform:translateY(-3px);
 }
 
-.btn-login a,
-.btn-login a:hover,
-.btn-login a:active {
-    color: white;
-    border-bottom: none;
-    text-decoration: none;
+.btn-login a{
+    color:white;
+    text-decoration:none;
 }
 
-.btn-header:hover{
-    transform:translateY(-3px);
-}
- 
-/* 2. Reset profesional */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* =========================
+    CONTENEDOR LOGIN
+========================= */
+
+.login-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
 }
 
-body {
-    background-color: var(--gris-fondo);
-    color: var(--texto-oscuro);
+/* =========================
+        TARJETA
+========================= */
+
+.login-card{
+    background:var(--blanco);
+    width:100%;
+    max-width:420px;
+    padding:40px 35px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
 }
 
-/* 3. Contenedor Principal (El Padre Flex) */
-.login-container {
-    display: flex; 
-    justify-content: center; /* Centrado horizontal */
-    align-items: center;     /* Centrado vertical */
-    min-height: 100vh;       /* Fuerza a ocupar todo el alto de la pantalla */
-    padding: 20px;
+/* =========================
+    ENCABEZADO LOGIN
+========================= */
+
+.login-header{
+    text-align:center;
 }
 
-/* 4. Estilos de la Tarjeta */
-.login-card {
-    background-color: var(--blanco);
-    width: 100%;
-    max-width: 400px; /* Evita que se estire demasiado en pantallas de computadora */
-    padding: 40px 30px;
-    border-radius: var(--borde-radio);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+/* =========================
+        FORMULARIO
+========================= */
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-bottom:20px;
 }
 
-.login-header {
-    text-align: center;
-    margin-bottom: 30px;
+.form-group label{
+    font-size:.9rem;
+    font-weight:600;
+    color:var(--texto-oscuro);
 }
 
-.login-header .logo {
-    font-size: 3rem;
-    margin-bottom: 10px;
+.form-group input{
+    width:100%;
+    padding:13px 16px;
+    border:2px solid #E8D8D9;
+    border-radius:10px;
+    font-size:1rem;
+    transition:.3s;
 }
 
-.login-header h1 {
-    color: var(--rojo-brand);
-    font-size: 1.8rem;
-    margin-bottom: 5px;
+.form-group input:focus{
+    outline:none;
+    border-color:var(--amarillo-brand);
+    box-shadow:0 0 8px rgba(123,78,87,.18);
 }
 
-.login-header p {
-    color: var(--texto-mutado);
-    font-size: 0.9rem;
+/* =========================
+    ENLACE CONTRASEÑA
+========================= */
+
+.form-actions{
+    margin-bottom:25px;
+    text-align:right;
 }
 
-/* 5. Grupos de Formulario (Inputs y Labels) */
-.form-group {
-    display: flex;
-    flex-direction: column; /* Apila el label sobre el input */
-    gap: 8px;
-    margin-bottom: 20px;
+.forgot-password{
+    color:var(--rojo-brand);
+    text-decoration:none;
+    font-size:.9rem;
 }
 
-.form-group label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--texto-oscuro);
+.forgot-password:hover{
+    color:var(--amarillo-brand);
+    text-decoration:underline;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid #cccccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.2s;
+/* =========================
+        BOTÓN
+========================= */
+
+.btn-submit{
+    width:100%;
+    background:var(--amarillo-brand);
+    color:white;
+    border:none;
+    padding:14px;
+    font-size:1rem;
+    font-weight:bold;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
 }
 
-/* Efecto Focus para mejorar la UX */
-.form-group input:focus {
-    outline: none;
-    border-color: var(--rojo-brand);
+.btn-submit:hover{
+    background:var(--rojo-brand);
+    transform:translateY(-2px);
 }
 
-/* Enlaces y acciones secundarias */
-.form-actions {
-    margin-bottom: 25px;
-    text-align: right;
-}
-
-.forgot-password {
-    font-size: 0.85rem;
-    color: var(--texto-mutado);
-    text-decoration: none;
-}
-
-.forgot-password:hover {
-    text-decoration: underline;
-    color: var(--rojo-brand);
-}
-
-/* 6. Botón Principal */
-.btn-submit {
-    width: 100%;
-    background-color: var(--amarillo-brand);
-    color: var(--texto-oscuro);
-    border: none;
-    padding: 14px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
-}
-
-.btn-submit:hover {
-    background-color: #f9a825; /* Un tono amarillo ligeramente más oscuro */
-}
-
-.btn-submit:active {
-    transform: scale(0.98); /* Simula el hundimiento al hacer clic */
+.btn-submit:active{
+    transform:scale(.98);
 }
