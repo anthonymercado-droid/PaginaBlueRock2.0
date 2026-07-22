@@ -24,10 +24,27 @@ header{
     text-align:center;
 }
 
-.logo h1{
+.logo a,
+.logo a:hover,
+.logo a:active {
+    color: #6B3D49;
+    border-bottom: none;
+    text-decoration: none;
+}
+
+.titulo-logo{
     font-family:'Cormorant Garamond',serif;
     font-size:70px;
     color:#6B3D49;
+    border: 0;
+}
+
+.titulo-logo a,
+.titulo-logo a:hover,
+.titulo-logo a:active {
+    color: #6B3D49;
+    border-bottom: none;
+    text-decoration: none;
 }
 
 .logo p{
