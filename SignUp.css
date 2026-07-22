@@ -1,0 +1,221 @@
+:root {
+    --rojo-brand: #6B3D49;
+    --amarillo-brand: #7B4E57;
+    --gris-fondo: #F8F2EF;
+    --blanco: #ffffff;
+    --texto-oscuro: #4A2F37;
+    --texto-mutado: #8D6670;
+    --borde-radio: 12px;
+}
+
+/* =========================
+        RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* =========================
+        BODY
+========================= */
+
+body {
+    background-color: var(--gris-fondo);
+    color: var(--texto-oscuro);
+}
+
+/* =========================
+        HEADER
+========================= */
+
+header{
+    width:90%;
+    margin:auto;
+    padding:30px 0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.logo{
+    text-align:center;
+}
+
+.logo a,
+.logo a:hover,
+.logo a:active{
+    color:#6B3D49;
+    text-decoration:none;
+}
+
+.titulo-logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:70px;
+    color:#6B3D49;
+    border: 0;
+}
+
+.logo p{
+    letter-spacing:5px;
+    color:#8D6670;
+    font-size:14px;
+}
+
+/* =========================
+    BOTONES HEADER
+========================= */
+
+.btn-header{
+    padding:14px 28px;
+    border:2px solid #8D6670;
+    background:transparent;
+    border-radius:12px;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-header:hover{
+    transform:translateY(-3px);
+}
+
+.btn-header a{
+    color:#6B3D49;
+    text-decoration:none;
+}
+
+.btn-login{
+    padding:14px 28px;
+    background:#7B4E57;
+    border:2px solid #8D6670;
+    border-radius:12px;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-login:hover{
+    transform:translateY(-3px);
+}
+
+.btn-login a{
+    color:white;
+    text-decoration:none;
+}
+
+/* =========================
+    CONTENEDOR LOGIN
+========================= */
+
+.login-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+/* =========================
+        TARJETA
+========================= */
+
+.login-card{
+    background:var(--blanco);
+    width:100%;
+    max-width:420px;
+    padding:40px 35px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+/* =========================
+    ENCABEZADO LOGIN
+========================= */
+
+.login-header{
+    text-align:center;
+}
+
+
+/* =========================
+        FORMULARIO
+========================= */
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-bottom:20px;
+}
+
+.form-group label{
+    font-size:.9rem;
+    font-weight:600;
+    color:var(--texto-oscuro);
+}
+
+.form-group input{
+    width:100%;
+    padding:13px 16px;
+    border:2px solid #E8D8D9;
+    border-radius:10px;
+    font-size:1rem;
+    transition:.3s;
+}
+
+.form-group input:focus{
+    outline:none;
+    border-color:var(--amarillo-brand);
+    box-shadow:0 0 8px rgba(123,78,87,.18);
+}
+
+/* =========================
+    ENLACE CONTRASEÑA
+========================= */
+
+.form-actions{
+    margin-bottom:25px;
+    text-align:right;
+}
+
+.forgot-password{
+    color:var(--rojo-brand);
+    text-decoration:none;
+    font-size:.9rem;
+}
+
+.forgot-password:hover{
+    color:var(--amarillo-brand);
+    text-decoration:underline;
+}
+
+/* =========================
+        BOTÓN
+========================= */
+
+.btn-submit{
+    width:100%;
+    background:var(--amarillo-brand);
+    color:white;
+    border:none;
+    padding:14px;
+    font-size:1rem;
+    font-weight:bold;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-submit:hover{
+    background:var(--rojo-brand);
+    transform:translateY(-2px);
+}
+
+.btn-submit:active{
+    transform:scale(.98);
+}
