@@ -1,0 +1,130 @@
+:root {
+    --rojo-brand: #d32f2f;
+    --amarillo-brand: #fbc02d;
+    --gris-fondo: #f5f5f5;
+    --blanco: #ffffff;
+    --texto-oscuro: #212121;
+    --texto-mutado: #666666;
+    --borde-radio: 12px;
+}
+ 
+/* 2. Reset profesional */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--gris-fondo);
+    color: var(--texto-oscuro);
+}
+
+/* 3. Contenedor Principal (El Padre Flex) */
+.login-container {
+    display: flex; 
+    justify-content: center; /* Centrado horizontal */
+    align-items: center;     /* Centrado vertical */
+    min-height: 100vh;       /* Fuerza a ocupar todo el alto de la pantalla */
+    padding: 20px;
+}
+
+/* 4. Estilos de la Tarjeta */
+.login-card {
+    background-color: var(--blanco);
+    width: 100%;
+    max-width: 400px; /* Evita que se estire demasiado en pantallas de computadora */
+    padding: 40px 30px;
+    border-radius: var(--borde-radio);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header .logo {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.login-header h1 {
+    color: var(--rojo-brand);
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.login-header p {
+    color: var(--texto-mutado);
+    font-size: 0.9rem;
+}
+
+/* 5. Grupos de Formulario (Inputs y Labels) */
+.form-group {
+    display: flex;
+    flex-direction: column; /* Apila el label sobre el input */
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--texto-oscuro);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+/* Efecto Focus para mejorar la UX */
+.form-group input:focus {
+    outline: none;
+    border-color: var(--rojo-brand);
+}
+
+/* Enlaces y acciones secundarias */
+.form-actions {
+    margin-bottom: 25px;
+    text-align: right;
+}
+
+.forgot-password {
+    font-size: 0.85rem;
+    color: var(--texto-mutado);
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+    color: var(--rojo-brand);
+}
+
+/* 6. Botón Principal */
+.btn-submit {
+    width: 100%;
+    background-color: var(--amarillo-brand);
+    color: var(--texto-oscuro);
+    border: none;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-submit:hover {
+    background-color: #f9a825; /* Un tono amarillo ligeramente más oscuro */
+}
+
+.btn-submit:active {
+    transform: scale(0.98); /* Simula el hundimiento al hacer clic */
+}
