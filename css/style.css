@@ -102,7 +102,7 @@ header{
 
 .cards{
     width:90%;
-    margin:auto;
+    margin:auto; 
 
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -186,6 +186,14 @@ header{
 
 .btn-card:hover{
     background:#6B3D49;
+}
+
+.btn-card a,
+.btn-card a:hover,
+.btn-card a:active{
+    color: white;
+    text-decoration: none;
+    border-bottom: none;
 }
 
 .beneficios{
