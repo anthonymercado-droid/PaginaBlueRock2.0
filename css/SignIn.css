@@ -1,10 +1,10 @@
 :root {
-    --rojo-brand: #d32f2f;
-    --amarillo-brand: #fbc02d;
-    --gris-fondo: #f5f5f5;
+    --rojo-brand: #6B3D49;
+    --amarillo-brand: #7B4E57;
+    --gris-fondo: #F8F2EF;
     --blanco: #ffffff;
-    --texto-oscuro: #212121;
-    --texto-mutado: #666666;
+    --texto-oscuro: #4A2F37;
+    --texto-mutado: #8D6670;
     --borde-radio: 12px;
 }
  
@@ -19,6 +19,40 @@
 body {
     background-color: var(--gris-fondo);
     color: var(--texto-oscuro);
+}
+
+header{
+    width:90%;
+    margin:auto;
+    padding:30px 0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.logo{
+    text-align:center;
+}
+
+.logo a,
+.logo a:hover,
+.logo a:active{
+    color:#6B3D49;
+    text-decoration:none;
+}
+
+.titulo-logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:50px;
+    color:#6B3D49;
+    border: 0;
+}
+
+.logo p{
+    letter-spacing:5px;
+    color:#8D6670;
+    font-size:14px;
 }
 
 /* 3. Contenedor Principal (El Padre Flex) */
@@ -41,8 +75,8 @@ body {
 }
 
 .login-header {
-    text-align: center;
-    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
 }
 
 .login-header .logo {
@@ -52,14 +86,11 @@ body {
 
 .login-header h1 {
     color: var(--rojo-brand);
-    font-size: 1.8rem;
+    font-size: 2.8rem;
     margin-bottom: 5px;
+    font-family:'Cormorant Garamond',serif;
 }
 
-.login-header p {
-    color: var(--texto-mutado);
-    font-size: 0.9rem;
-}
 
 /* 5. Grupos de Formulario (Inputs y Labels) */
 .form-group {
