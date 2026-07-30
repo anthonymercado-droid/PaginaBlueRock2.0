@@ -67,26 +67,31 @@
 
     <!-- MÓDULO CONEXIÓN CON FIREBASE -->
     <script type="module">
+        // 1. Importar SDK principal de Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        
+        // 2. Importar funciones necesarias para Autenticación
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        
+        // 3. Importar funciones necesarias para Firestore (Base de datos)
         import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // ⚠️ REEMPLAZA ESTO CON TUS CREDENCIALES DE LA CONSOLA DE FIREBASE
+        // Tus credenciales reales de Firebase para Blue Rock
         const firebaseConfig = {
-            apiKey: "TU_API_KEY",
-            authDomain: "tu-proyecto.firebaseapp.com",
-            projectId: "tu-proyecto-id",
-            storageBucket: "tu-proyecto.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef"
+            apiKey: "AIzaSyArRVa6N2XNwdYQKiR7drCqECMczH-JPQ0",
+            authDomain: "bluerock-ee20b.firebaseapp.com",
+            projectId: "bluerock-ee20b",
+            storageBucket: "bluerock-ee20b.firebasestorage.app",
+            messagingSenderId: "944470168965",
+            appId: "1:944470168965:web:2d7cfd42773b9573d060ec"
         };
 
-        // Inicializar Firebase
+        // Inicializar Firebase, Auth y Firestore
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // Capturar el formulario
+        // Capturar elementos del DOM
         const form = document.getElementById('registro-form');
         const mensajeBox = document.getElementById('mensaje-estado');
         const btnSubmit = document.getElementById('btn-registrar');
@@ -94,12 +99,12 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Bloquear botón para evitar múltiples clics
+            // Bloquear botón durante la petición
             btnSubmit.disabled = true;
             btnSubmit.textContent = "Registrando...";
             mensajeBox.style.display = "none";
 
-            // Obtener los valores ingresados por el usuario
+            // Obtener datos ingresados
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const nombre = document.getElementById('nombre').value;
@@ -108,12 +113,12 @@
             const fechaNacimiento = document.getElementById('fecha').value;
 
             try {
-                // 1. Crear el usuario en Firebase Authentication (Email + Password)
+                // Step 1: Crear usuario en Firebase Auth
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
 
-                // 2. Guardar los datos adicionales del perfil en Firestore (Colección "usuarios")
-                await setDoc(doc(db, "usuarios", user.uid), {
+                // Step 2: Guardar perfil en la colección "usuario" en Firestore
+                await setDoc(doc(db, "usuario", user.uid), {
                     nombre: nombre,
                     apellido: apellido,
                     email: email,
@@ -123,15 +128,14 @@
                     fechaRegistro: new Date()
                 });
 
-                // Mostrar mensaje de éxito
+                // Notificación visual de éxito
                 mensajeBox.style.display = "block";
                 mensajeBox.style.backgroundColor = "#E8F5E9";
                 mensajeBox.style.color = "#2E7D32";
                 mensajeBox.textContent = "¡Registro exitoso! Redireccionando...";
 
-                // Redireccionar al usuario tras 1.5 segundos
                 setTimeout(() => {
-                    window.location.href = "agendar-cita.html"; // O a la tienda.html
+                    window.location.href = "agendar-cita.html";
                 }, 1500);
 
             } catch (error) {
@@ -141,13 +145,12 @@
                 mensajeBox.style.backgroundColor = "#FFEBEE";
                 mensajeBox.style.color = "#C62828";
 
-                // Manejo de errores comunes de Firebase Auth
                 if (error.code === 'auth/email-already-in-use') {
                     mensajeBox.textContent = "Este correo ya está registrado. Intenta iniciar sesión.";
                 } else if (error.code === 'auth/weak-password') {
                     mensajeBox.textContent = "La contraseña debe tener al menos 6 caracteres.";
                 } else {
-                    mensajeBox.textContent = "Ocurrió un error al crear la cuenta. Intenta de nuevo.";
+                    mensajeBox.textContent = "Ocurrió un error al crear la cuenta. Revisa tu conexión o intenta de nuevo.";
                 }
 
                 btnSubmit.disabled = false;
