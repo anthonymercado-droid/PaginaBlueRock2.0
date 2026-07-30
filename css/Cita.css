@@ -1,304 +1,299 @@
-/* VARIABLES CSS DE COLOR */
+/* ===================================================
+   VARIABLES DE COLOR Y PALETA BLUE ROCK
+   =================================================== */
 :root {
-    --bg-body: #F8F2EF;
-    --card-bg: #FFFFFF;
-    --text-color: #4A3B3E;
-    --header-text: #6B3D49;
-    --header-bg: #F0E6E5;
-    --accent-color: #7B4E57;
-    --border-color: #D3C2C4;
+    --bg-main: #F8F2EF;      
+    --card-bg: #FFFFFF;       
+    --header-bg: #FAF5F6;     
+    --header-text: #6B3D49;   
+    --text-color: #55333B;      
+    --text-muted: #8D6670;      
+    --accent-color: #7B4E57;   
+    --border-color: #D3C2C4;    
 }
 
-/* RESETEO GENERAL */
+/* ===================================================
+   RESETS Y ESTILOS GENERALES
+   =================================================== */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    min-height: 100vh;
-    background-color: var(--bg-body);
-    color: var(--text-color);
+    background-color: var(--bg-main);
     font-family: 'Poppins', sans-serif;
-    padding: 20px 10px;
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* ENCABEZADO / HEADER */
-header {
-    width: 100%;
-    max-width: 900px;
-    padding: 20px 0 30px 0;
-    display: flex;
     justify-content: center;
-    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
 }
 
-.logo {
+/* ===================================================
+   HEADER / LOGO (SUPERIOR)
+   =================================================== */
+header {
     text-align: center;
+    margin-bottom: 24px;
 }
 
-.logo a,
-.logo a:hover,
-.logo a:active {
-    color: var(--header-text);
-    border-bottom: none;
+header .logo a {
     text-decoration: none;
 }
 
 .titulo-logo {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 60px;
+    font-size: 2.8rem;
+    font-weight: 600;
     color: var(--header-text);
-    border: 0;
-    line-height: 1;
+    letter-spacing: 1px;
 }
 
-.logo p {
-    letter-spacing: 4px;
-    color: #8D6670;
-    font-size: 13px;
-    margin-top: 5px;
+header p {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* ===================================================
+   CONTENEDOR PRINCIPAL DE RESERVA
+   =================================================== */
+.booking-container {
+    background-color: var(--card-bg);
+    max-width: 700px;
+    width: 100%;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(107, 61, 73, 0.08);
+}
+
+.booking-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.booking-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    color: var(--header-text);
+    margin-bottom: 6px;
+}
+
+.booking-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.booking-section {
+    margin-bottom: 32px;
+}
+
+.booking-section h3 {
+    font-size: 1.15rem;
+    color: var(--header-text);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.step-num {
+    background-color: var(--accent-color);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
     font-weight: 600;
 }
 
-.btn-header {
-    padding: 14px 28px;
-    border: 2px solid #8D6670;
-    background: transparent;
-    border-radius: 12px;
-    font-size: 18px;
+.category-title {
     color: var(--header-text);
-    cursor: pointer;
-    transition: .3s;
+    font-size: 1rem;
+    margin: 20px 0 12px 0;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 6px;
 }
 
-.btn-header a,
-.btn-header a:hover,
-.btn-header a:active {
-    color: var(--header-text);
-    border-bottom: none;
-    text-decoration: none;
-}
-
-.btn-login {
-    padding: 14px 28px;
-    background: var(--accent-color);
-    border: 2px solid #8D6670;
-    border-radius: 12px;
-    font-size: 18px;
-    color: white;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.btn-login:hover,
-.btn-header:hover {
-    transform: translateY(-3px);
-}
-
-.btn-login a,
-.btn-login a:hover,
-.btn-login a:active {
-    color: white;
-    border-bottom: none;
-    text-decoration: none;
-}
-
-/* CONTENEDOR DEL FORMULARIO */
-.form-container {
-    background-color: var(--card-bg);
-    max-width: 900px;
-    width: 100%;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(107, 61, 73, 0.08);
-}
-
-/* DISPOSICIÓN EN GRID */
-.grid-container {
+/* ===================================================
+   GRILLAS (SERVICIOS Y FECHA/HORA)
+   =================================================== */
+/* Muestra las tarjetas de servicios de 2 en 2 */
+.services-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+/* Coloca la fecha arriba y los horarios abajo */
+.datetime-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 @media (max-width: 768px) {
-    .grid-container {
-        grid-template-columns: 1fr;
+    .booking-container {
+        padding: 24px 18px;
     }
-    .form-container {
-        padding: 20px;
-    }
-    .titulo-logo {
-        font-size: 48px;
+
+    .services-grid {
+        grid-template-columns: 1fr; /* En celulares pasa a 1 sola columna */
     }
 }
 
-/* BLOQUES */
-.block {
-    margin-bottom: 20px;
+/* ===================================================
+   OCULTAR INPUTS NATIVOS (CHECKBOX Y RADIO)
+   =================================================== */
+.service-card input[type="checkbox"],
+.time-chip input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
 }
 
-.block-header {
-    background-color: var(--header-bg);
-    color: var(--header-text);
-    padding: 10px 14px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    border-radius: 6px;
-    margin-bottom: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+/* ===================================================
+   TARJETAS DE SERVICIO
+   =================================================== */
+.service-card {
+    background-color: var(--card-bg);
+    border: 1.5px solid var(--border-color);
+    border-radius: 10px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: block;
+    user-select: none;
 }
 
-/* CAMPOS DE FORMULARIO */
-.form-group {
-    margin-bottom: 12px;
-    font-size: 0.9rem;
+.service-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
 }
 
-.form-group.inline {
+.card-content {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 4px;
 }
 
-.form-group.inline input[type="text"] {
-    flex: 1;
-}
-
-label {
+.service-title {
     font-weight: 600;
+    font-size: 0.9rem;
     color: var(--text-color);
 }
 
-input[type="text"], 
-textarea {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid var(--border-color);
-    padding: 6px 4px;
-    outline: none;
-    background: transparent;
-    font-family: inherit;
-    color: #333;
-    transition: border-color 0.2s;
+.service-duration {
+    font-size: 0.8rem;
+    color: var(--text-muted);
 }
 
-input[type="text"]:focus, 
-textarea:focus {
-    border-bottom-color: var(--accent-color);
+/* Estado Seleccionado de Tarjetas */
+.service-card:has(input[type="checkbox"]:checked) {
+    border-color: var(--accent-color);
+    background-color: var(--header-bg);
+    box-shadow: 0 4px 12px rgba(123, 78, 87, 0.15);
 }
 
-.input-edad {
-    width: 60px !important;
-    flex: none !important;
+.service-card:has(input[type="checkbox"]:checked) .service-title {
+    color: var(--header-text);
 }
 
-.input-sub {
-    margin-top: 6px;
-}
-
-.label-productos {
+/* ===================================================
+   FECHA Y CHIPS DE HORARIO
+   =================================================== */
+.form-group label {
     display: block;
-    margin-top: 14px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--header-text);
     margin-bottom: 8px;
 }
 
-/* OPCIONES (CHECKBOX Y RADIO) */
-.options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 6px;
-}
-
-.options label {
-    font-weight: normal;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.88rem;
-}
-
-.vertical-options {
-    flex-direction: column;
-    gap: 8px;
-}
-
-.grid-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-/* ÁREA DE TEXTO (OBSERVACIONES) */
-textarea {
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 10px;
-    resize: vertical;
+input[type="date"] {
     width: 100%;
-}
-
-/* CONSENTIMIENTO Y FIRMA */
-.consent {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.consent-text {
-    font-style: italic;
-    margin-top: 10px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: inherit;
     font-size: 0.9rem;
-    color: #666;
+    color: var(--text-color);
+    background-color: transparent;
+    outline: none;
+    transition: border-color 0.2s ease;
 }
 
-.signature-container {
-    margin-top: 40px;
-    display: flex;
-    align-items: flex-end;
+input[type="date"]:focus {
+    border-color: var(--accent-color);
+}
+
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.signature-line {
-    flex: 1;
-    border-bottom: 1px solid var(--text-color);
+.time-chip {
+    cursor: pointer;
+    user-select: none;
 }
 
-/* BOTÓN DE ENVÍO */
-.btn-submit {
+.time-chip span {
     display: block;
+    text-align: center;
+    padding: 12px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+}
+
+.time-chip:hover span {
+    border-color: var(--accent-color);
+}
+
+/* Estado Seleccionado de Horarios */
+.time-chip:has(input[type="radio"]:checked) span {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* ===================================================
+   BOTÓN DE ENVÍO
+   =================================================== */
+.btn-submit {
     width: 100%;
-    padding: 14px;
     background-color: var(--accent-color);
     color: white;
     border: none;
-    border-radius: 8px;
+    padding: 16px 20px;
     font-size: 1rem;
     font-weight: 600;
+    border-radius: 10px;
     cursor: pointer;
-    margin-top: 30px;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
 }
 
 .btn-submit:hover {
     background-color: var(--header-text);
+    transform: translateY(-2px);
 }
 
-/* CLASES DE UTILIDAD */
-.margin-0 {
-    margin: 0;
-}
-
-.margin-top-8 {
-    margin-top: 8px;
+.btn-submit:disabled {
+    background-color: #D3C2C4;
+    cursor: not-allowed;
 }

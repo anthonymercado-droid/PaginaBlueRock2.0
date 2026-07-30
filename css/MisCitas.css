@@ -1,5 +1,5 @@
 /* --------------------------------------------------
-   PÁGINA MIS CITAS - BLUE ROCK
+    PÁGINA MIS CITAS - BLUE ROCK
 -------------------------------------------------- */
 
 .container {
@@ -169,15 +169,174 @@
     transform: translateY(-2px);
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-    .appointment-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
+/* --------------------------------------------------
+   NUEVAS SECCIONES: RECOMENDACIONES, RUTINAS Y PRODUCTOS
+-------------------------------------------------- */
 
-    .profile-banner {
-        padding: 25px;
-    }
+/* Grilla general de tarjetas dinámicas */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
 }
+
+/* Tarjetas de Recomendaciones de Tratamientos */
+.info-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    border: 1px solid rgba(141, 102, 112, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(92, 54, 64, 0.1);
+}
+
+.info-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.card-icon {
+    font-size: 1.6rem;
+}
+
+.info-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #6B3D49;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.info-card p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+.badge-recommendation {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #7B4E57;
+    background-color: #F8F2EF;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin: 14px 0;
+    border: 1px solid rgba(123, 78, 87, 0.2);
+}
+
+.btn-card-action {
+    display: block;
+    text-align: center;
+    background-color: #7B4E57;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-card-action:hover {
+    background-color: #5C3640;
+    transform: translateY(-2px);
+}
+
+/* Bloques de Rutina Facial */
+.routine-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.routine-block {
+    background: #FAF8F7;
+    border-left: 5px solid #7B4E57;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(141, 102, 112, 0.15);
+    border-left-width: 5px;
+}
+
+.routine-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #5C3640;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.routine-steps {
+    padding-left: 18px;
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.routine-steps li strong {
+    color: #333;
+}
+
+/* Tarjetas de Productos Cosméticos de Uso Diario */
+.product-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    border: 1px solid rgba(141, 102, 112, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(92, 54, 64, 0.1);
+}
+
+.product-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #8D5664;
+    font-weight: 600;
+    margin-bottom: 8px;
+    background-color: #FAF8F7;
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+.product-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #6B3D49;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.product-card p {
+    font-size: 0.88rem;
+    color: #666;
+    line-height: 1.45;
+}
+
+.product-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #5C3640;
+    margin-top: 16px;
+    border-top: 1px dashed rgba(141, 102, 112, 0.2);
+    padding-top: 10px;
+}   
