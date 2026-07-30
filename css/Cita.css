@@ -1,91 +1,103 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* VARIABLES CSS DE COLOR */
+:root {
+    --bg-body: #F8F2EF;
+    --card-bg: #FFFFFF;
+    --text-color: #4A3B3E;
+    --header-text: #6B3D49;
+    --header-bg: #F0E6E5;
+    --accent-color: #7B4E57;
+    --border-color: #D3C2C4;
 }
 
-body{
-    min-height:100vh;
-    background:#F8F2EF;
-    font-family:'Poppins',sans-serif;
+/* RESETEO GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-header{
-    width:90%;
-    margin:auto;
-    padding:30px 0;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
+body {
+    min-height: 100vh;
+    background-color: var(--bg-body);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.logo{
-    text-align:center;
+/* ENCABEZADO / HEADER */
+header {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px 0 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    text-align: center;
 }
 
 .logo a,
 .logo a:hover,
 .logo a:active {
-    color: #6B3D49;
+    color: var(--header-text);
     border-bottom: none;
     text-decoration: none;
 }
 
-.titulo-logo{
-    font-family:'Cormorant Garamond',serif;
-    font-size:70px;
-    color:#6B3D49;
+.titulo-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 60px;
+    color: var(--header-text);
     border: 0;
+    line-height: 1;
 }
 
-.titulo-logo a,
-.titulo-logo a:hover,
-.titulo-logo a:active {
-    color: #6B3D49;
-    border-bottom: none;
-    text-decoration: none;
+.logo p {
+    letter-spacing: 4px;
+    color: #8D6670;
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: 600;
 }
 
-.logo p{
-    letter-spacing:5px;
-    color:#8D6670;
-    font-size:14px;
-}
-
-.btn-header{
-    padding:14px 28px;
-    border:2px solid #8D6670;
-    background:transparent;
-    border-radius:12px;
-    font-size:18px;
-    color:#6B3D49;
-    cursor:pointer;
-    transition:.3s;
+.btn-header {
+    padding: 14px 28px;
+    border: 2px solid #8D6670;
+    background: transparent;
+    border-radius: 12px;
+    font-size: 18px;
+    color: var(--header-text);
+    cursor: pointer;
+    transition: .3s;
 }
 
 .btn-header a,
 .btn-header a:hover,
 .btn-header a:active {
-    color: #6B3D49;
+    color: var(--header-text);
     border-bottom: none;
     text-decoration: none;
 }
 
-
-.btn-login{
-    padding:14px 28px;
-    background:#7B4E57;
-    border:2px solid #8D6670;
-    border-radius:12px;
-    font-size:18px;
-    color:white;
-    cursor:pointer;
-    transition:.3s;
+.btn-login {
+    padding: 14px 28px;
+    background: var(--accent-color);
+    border: 2px solid #8D6670;
+    border-radius: 12px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
 }
 
-.btn-login:hover {
-    transform:translateY(-3px);
+.btn-login:hover,
+.btn-header:hover {
+    transform: translateY(-3px);
 }
 
 .btn-login a,
@@ -96,8 +108,197 @@ header{
     text-decoration: none;
 }
 
-.btn-header:hover{
-    transform:translateY(-3px);
+/* CONTENEDOR DEL FORMULARIO */
+.form-container {
+    background-color: var(--card-bg);
+    max-width: 900px;
+    width: 100%;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(107, 61, 73, 0.08);
 }
 
-/* Aqui para abajo es la pagina */
+/* DISPOSICIÓN EN GRID */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+    .form-container {
+        padding: 20px;
+    }
+    .titulo-logo {
+        font-size: 48px;
+    }
+}
+
+/* BLOQUES */
+.block {
+    margin-bottom: 20px;
+}
+
+.block-header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 10px 14px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* CAMPOS DE FORMULARIO */
+.form-group {
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+}
+
+.form-group.inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group.inline input[type="text"] {
+    flex: 1;
+}
+
+label {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+input[type="text"], 
+textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 6px 4px;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    color: #333;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus, 
+textarea:focus {
+    border-bottom-color: var(--accent-color);
+}
+
+.input-edad {
+    width: 60px !important;
+    flex: none !important;
+}
+
+.input-sub {
+    margin-top: 6px;
+}
+
+.label-productos {
+    display: block;
+    margin-top: 14px;
+    margin-bottom: 8px;
+}
+
+/* OPCIONES (CHECKBOX Y RADIO) */
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+.options label {
+    font-weight: normal;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.88rem;
+}
+
+.vertical-options {
+    flex-direction: column;
+    gap: 8px;
+}
+
+.grid-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* ÁREA DE TEXTO (OBSERVACIONES) */
+textarea {
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 10px;
+    resize: vertical;
+    width: 100%;
+}
+
+/* CONSENTIMIENTO Y FIRMA */
+.consent {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.consent-text {
+    font-style: italic;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.signature-container {
+    margin-top: 40px;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.signature-line {
+    flex: 1;
+    border-bottom: 1px solid var(--text-color);
+}
+
+/* BOTÓN DE ENVÍO */
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-submit:hover {
+    background-color: var(--header-text);
+}
+
+/* CLASES DE UTILIDAD */
+.margin-0 {
+    margin: 0;
+}
+
+.margin-top-8 {
+    margin-top: 8px;
+}
