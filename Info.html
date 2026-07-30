@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Cita - Blue Rock</title>
+    
+    <!-- Fuentes Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Archivo CSS -->
+    <link rel="stylesheet" href="css/Cita.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html">  
+                <h1 class="titulo-logo">Blue Rock</h1>
+            </a>
+            <p>BELLEZA • CONFIANZA • BIENESTAR</p>
+        </div>
+    </header>
+
+    <div class="form-container">
+        <form>
+            <div class="grid-container">
+                
+                <!-- COLUMNA IZQUIERDA -->
+                <div class="column">
+                  
+                    <!-- BLOQUE 1 -->
+                    <div class="block">
+                        <div class="block-header">👤 BLOQUE 1: DATOS PERSONALES</div>
+                        <div class="form-group inline">
+                            <label>Nombre completo:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group inline">
+                            <label>Edad:</label>
+                            <input type="text" class="input-edad">
+                        </div>
+                        <div class="form-group inline">
+                            <label>Dirección:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group inline">
+                            <label>Teléfono:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group inline">
+                            <label>Correo:</label>
+                            <input type="text">
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 2 -->
+                    <div class="block">
+                        <div class="block-header">🩺 BLOQUE 2: INFORMACIÓN DE SALUD</div>
+                    
+                        <div class="form-group">
+                            <label>¿Está embarazada?</label>
+                            <div class="options">
+                                <label><input type="radio" name="embarazada"> Sí</label>
+                                <label><input type="radio" name="embarazada"> No</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>¿Padece alguna enfermedad?</label>
+                            <div class="options">
+                                <label><input type="radio" name="enfermedad"> Sí</label>
+                                <label><input type="radio" name="enfermedad"> No</label>
+                            </div>
+                            <input type="text" placeholder="¿Cuál?" class="input-sub">
+                        </div>
+
+                        <div class="form-group">
+                            <label>¿Toma medicamentos?</label>
+                            <div class="options">
+                                <label><input type="radio" name="medicamentos"> Sí</label>
+                                <label><input type="radio" name="medicamentos"> No</label>
+                            </div>
+                            <input type="text" placeholder="¿Cuáles?" class="input-sub">
+                        </div>
+
+                        <div class="form-group">
+                            <label>¿Tiene alergias?</label>
+                            <div class="options">
+                                <label><input type="radio" name="alergias"> Sí</label>
+                                <label><input type="radio" name="alergias"> No</label>
+                            </div>
+                            <input type="text" placeholder="¿A qué?" class="input-sub">
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 3 -->
+                    <div class="block">
+                        <div class="block-header">🧠 BLOQUE 3: HÁBITOS DE VIDA</div>
+                    
+                        <div class="form-group">
+                            <label>Agua diaria:</label>
+                            <div class="options">
+                                <label><input type="radio" name="agua"> Baja</label>
+                                <label><input type="radio" name="agua"> Media</label>
+                                <label><input type="radio" name="agua"> Alta</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sueño:</label>
+                            <div class="options">
+                                <label><input type="radio" name="sueno"> Bueno</label>
+                                <label><input type="radio" name="sueno"> Regular</label>
+                                <label><input type="radio" name="sueno"> Malo</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Estrés:</label>
+                            <div class="options">
+                                <label><input type="radio" name="estres"> Bajo</label>
+                                <label><input type="radio" name="estres"> Medio</label>
+                                <label><input type="radio" name="estres"> Alto</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>¿Fuma?</label>
+                            <div class="options">
+                                <label><input type="radio" name="fuma"> Sí</label>
+                                <label><input type="radio" name="fuma"> No</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>¿Alcohol?</label>
+                            <div class="options">
+                                <label><input type="radio" name="alcohol"> Sí</label>
+                                <label><input type="radio" name="alcohol"> No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 4 -->
+                    <div class="block">
+                        <div class="block-header">🍽️ BLOQUE 4: ALIMENTACIÓN</div>
+                        <div class="options vertical-options">
+                            <label><input type="checkbox"> Balanceada</label>
+                            <label><input type="checkbox"> Alta en grasas</label>
+                            <label><input type="checkbox"> Alta en azúcares</label>
+                            <div class="form-group inline margin-0">
+                                <label><input type="checkbox"> Otro:</label>
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- COLUMNA DERECHA -->
+                <div class="column">
+                  
+                    <!-- BLOQUE 5 -->
+                    <div class="block">
+                        <div class="block-header">🧴 BLOQUE 5: RUTINA DE CUIDADO</div>
+                    
+                        <div class="form-group">
+                            <label>¿Limpia su rostro?</label>
+                            <div class="options">
+                                <label><input type="radio" name="limpia"> Sí</label>
+                                <label><input type="radio" name="limpia"> No</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>¿Usa protector solar?</label>
+                            <div class="options">
+                                <label><input type="radio" name="protector"> Sí</label>
+                                <label><input type="radio" name="protector"> No</label>
+                            </div>
+                        </div>
+
+                        <label class="label-productos">Productos que utiliza:</label>
+                        <div class="form-group inline">
+                            <label>Limpiador:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group inline">
+                            <label>Hidratante:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group inline">
+                            <label>Protector solar:</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group inline">
+                            <label>Otros:</label>
+                            <input type="text">
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 6 -->
+                    <div class="block">
+                        <div class="block-header">☀️ BLOQUE 6: EXPOSICIÓN AL SOL</div>
+                    
+                        <div class="form-group">
+                            <label>¿Se expone frecuentemente?</label>
+                            <div class="options">
+                                <label><input type="radio" name="sol"> Sí</label>
+                                <label><input type="radio" name="sol"> No</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Uso de protector:</label>
+                            <div class="options">
+                                <label><input type="radio" name="uso_prot"> Siempre</label>
+                                <label><input type="radio" name="uso_prot"> A veces</label>
+                                <label><input type="radio" name="uso_prot"> Nunca</label>
+                            </div>
+                        </div>
+
+                        <div class="options grid-options">
+                            <label><input type="checkbox"> Acné</label>
+                            <label><input type="checkbox"> Manchas</label>
+                            <label><input type="checkbox"> Hidratación</label>
+                            <label><input type="checkbox"> Rejuvenecimiento</label>
+                            <label><input type="checkbox"> Control de grasa</label>
+                        </div>
+                        <div class="form-group inline margin-top-8">
+                            <label><input type="checkbox"> Otro:</label>
+                            <input type="text">
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 8 -->
+                    <div class="block">
+                        <div class="block-header">📝 BLOQUE 8: OBSERVACIONES</div>
+                        <textarea rows="6" placeholder="Escribe aquí las observaciones..."></textarea>
+                    </div>
+
+                    <!-- BLOQUE 9 -->
+                    <div class="block consent">
+                        <div class="block-header">✍️ BLOQUE 9: CONSENTIMIENTO</div>
+                        <p class="consent-text">
+                            "Declaro que la información proporcionada es verídica."
+                        </p>
+
+                        <div class="signature-container">
+                            <label>Firma:</label>
+                            <input type="text">
+                            <div class="signature-line"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn-submit">Guardar Ficha</button>
+        </form>
+    </div>
+
+</body>
+</html>

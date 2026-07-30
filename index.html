@@ -13,24 +13,40 @@
 
 <header>
 
-    <button class="btn-header">
-        <a href="SignUp.html">  
-            Registrarse
-        </a>
-    </button>
+    <!-- 1. Izquierda: Registrarse (Sin sesión) OR Mis Citas (Con sesión) -->
+    <div id="left-header-action">
+        <button class="btn-header" id="btn-registrarse">
+            <a href="SignUp.html">Registrarse</a>
+        </button>
+        
+        <button class="btn-header" id="btn-mis-citas" style="display: none;">
+            <a href="MisCitas.html">📅 Mis Citas</a>
+        </button>
+    </div>
 
+    <!-- 2. Centro: Logo Blue Rock -->
     <div class="logo">
         <a href="index.html">  
-        <h1 class="titulo-logo">Blue Rock</h1>
+            <h1 class="titulo-logo">Blue Rock</h1>
         </a>
         <p>BELLEZA • CONFIANZA • BIENESTAR</p>
     </div>
 
-    <button class="btn-login">
-        <a href="SignIn.html">
-            Iniciar Sesion
-        </a>
-    </button>
+    <!-- 3. Derecha: Botón Iniciar Sesión OR Panel de Usuario -->
+    <div id="right-header-action">
+
+        <!-- Opción A: Botón Iniciar Sesión (Sin sesión) -->
+        <button class="btn-login" id="btn-login-header">
+            <a href="SignIn.html">Iniciar Sesión</a>
+        </button>
+
+        <!-- Opción B: Nombre de Usuario + Cerrar Sesión (Con sesión) -->
+        <div id="auth-user" class="user-panel" style="display: none;">
+            <span class="user-greeting" id="user-display-name">👤 Hola, Usuario</span>
+            <button class="btn-logout" id="btn-cerrar-sesion">Cerrar Sesión</button>
+        </div>
+
+    </div>
 
 </header>
 
@@ -38,78 +54,115 @@
 <main class="cards">
 
     <section class="card">
-
         <div class="img img1"></div>
-
-        <div class="icono">
-            📅
-        </div>
-
+        <div class="icono">📅</div>
         <h2>Agendar Cita</h2>
-
         <p>
             Reserva tu cita con nuestros especialistas
             y disfruta de una experiencia única.
         </p>
-
         <button class="btn-card">
-            <a href="Cita.html">Agendar Cita</a>
+            <a href="Agendar.html">Agendar Cita</a>
         </button>
-
     </section>
 
-
     <section class="card">
-
         <div class="img img2"></div>
-
-        <div class="icono">
-            🛍️
-        </div> 
-
+        <div class="icono">🛍️</div> 
         <h2>Tienda</h2>
-
         <p>
             Descubre nuestra selección de productos
             de belleza y cuidado personal.
         </p>
-
         <button class="btn-card">
             <a href="Tienda.html">Ver Productos →</a>
         </button>
-
     </section>
 
 </main>
 
 
 <section class="beneficios">
-
-    <div class="beneficio">
-        ⭐ Productos Premium
-    </div>
-
-    <div class="beneficio">
-        👩 Especialistas Certificados.
-    </div>
-
-    <div class="beneficio">
-        💎 Experiencia Única
-    </div>
-
-    <div class="beneficio">
-        🛡️ Confianza Total
-    </div>
-
+    <div class="beneficio">⭐ Productos Premium</div>
+    <div class="beneficio">👩 Especialistas Certificados</div>
+    <div class="beneficio">💎 Experiencia Única</div>
+    <div class="beneficio">🛡️ Confianza Total</div>
 </section>
 
 <footer>
-
     <p>Tu belleza, nuestra pasión ❤</p>
-
     <p>© 2026 Blue Rock</p>
-
 </footer>
+
+<!-- SCRIPT VERIFICADOR DE SESIÓN CON FIREBASE -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyArRVa6N2XNwdYQKiR7drCqECMczH-JPQ0",
+        authDomain: "bluerock-ee20b.firebaseapp.com",
+        projectId: "bluerock-ee20b",
+        storageBucket: "bluerock-ee20b.firebasestorage.app",
+        messagingSenderId: "944470168965",
+        appId: "1:944470168965:web:2d7cfd42773b9573d060ec"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const btnRegistrarse = document.getElementById('btn-registrarse');
+    const btnMisCitas = document.getElementById('btn-mis-citas');
+    const btnLoginHeader = document.getElementById('btn-login-header');
+    const authUser = document.getElementById('auth-user');
+    const userNameLabel = document.getElementById('user-display-name');
+    const btnLogout = document.getElementById('btn-cerrar-sesion');
+
+    // Escuchar el estado de autenticación
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            // CON SESIÓN: Mostramos "Mis Citas" a la izquierda y el Panel de Usuario a la derecha
+            btnRegistrarse.style.display = "none";
+            btnMisCitas.style.display = "block";
+            btnLoginHeader.style.display = "none";
+            authUser.style.display = "flex";
+
+            try {
+                const userDocRef = doc(db, "usuario", user.uid);
+                const userDocSnap = await getDoc(userDocRef);
+
+                if (userDocSnap.exists()) {
+                    const datosUsuario = userDocSnap.data();
+                    userNameLabel.textContent = `👤 Hola, ${datosUsuario.nombre}`;
+                } else {
+                    userNameLabel.textContent = `👤 ${user.email}`;
+                }
+            } catch (error) {
+                console.error("Error al obtener perfil:", error);
+                userNameLabel.textContent = `👤 ${user.email}`;
+            }
+
+        } else {
+            // SIN SESIÓN: Mostramos Registrarse a la izquierda e Iniciar Sesión a la derecha
+            btnRegistrarse.style.display = "block";
+            btnMisCitas.style.display = "none";
+            btnLoginHeader.style.display = "block";
+            authUser.style.display = "none";
+        }
+    });
+
+    // Función para cerrar sesión
+    btnLogout.addEventListener('click', async () => {
+        try {
+            await signOut(auth);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error al cerrar sesión:", error);
+        }
+    });
+</script>
 
 </body>
 </html>

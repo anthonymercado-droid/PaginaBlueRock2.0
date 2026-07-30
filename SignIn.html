@@ -4,25 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/SignIn.css">
-    <title>Inicio de Sesion</title>
+    <title>Inicio de Sesión - Blue Rock</title>
 </head>
 <body>
 
-</header>
-
-        <!-- Contenedor principal para el centrado absoluto con Flexbox -->
+    <!-- Contenedor principal para el centrado absoluto con Flexbox -->
     <main class="login-container">
         
         <div class="login-card">
 
             <div class="logo">
                 <a href="index.html">  
-                <h1 class="titulo-logo">Blue Rock</h1>
+                    <h1 class="titulo-logo">Blue Rock</h1>
                 </a>
             </div>
 
             <!-- Formulario de Acceso -->
-            <form class="login-form">
+            <form class="login-form" id="login-form">
                 <div class="form-group">
                     <label for="email">Correo</label>
                     <input type="email" id="email" placeholder="bluerock@correo.com" required>
@@ -34,13 +32,137 @@
                 </div>
 
                 <div class="form-actions">
-                    <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                    <a href="#" class="forgot-password" id="btn-forgot-password">¿Olvidaste tu contraseña?</a>
                 </div>
 
-                <button type="submit" class="btn-submit">Ingresar</button>
+                <!-- Mensajes de estado (éxito o error) -->
+                <div id="mensaje-estado" style="display: none; text-align: center; font-size: 0.85rem; padding: 10px; border-radius: 6px; margin-top: 10px;"></div>
+
+                <button type="submit" class="btn-submit" id="btn-ingresar">Ingresar</button>
             </form>
         </div>
 
     </main>
+
+    <!-- MÓDULO CONEXIÓN CON FIREBASE -->
+    <script type="module">
+        // 1. Importar SDK principal de Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        
+        // 2. Importar funciones para Autenticación (SignIn y Restablecer Contraseña)
+        import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Credenciales de tu proyecto Blue Rock
+        const firebaseConfig = {
+            apiKey: "AIzaSyArRVa6N2XNwdYQKiR7drCqECMczH-JPQ0",
+            authDomain: "bluerock-ee20b.firebaseapp.com",
+            projectId: "bluerock-ee20b",
+            storageBucket: "bluerock-ee20b.firebasestorage.app",
+            messagingSenderId: "944470168965",
+            appId: "1:944470168965:web:2d7cfd42773b9573d060ec"
+        };
+
+        // Inicializar Firebase y Auth
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Capturar elementos del DOM
+        const form = document.getElementById('login-form');
+        const mensajeBox = document.getElementById('mensaje-estado');
+        const btnSubmit = document.getElementById('btn-ingresar');
+        const btnForgotPassword = document.getElementById('btn-forgot-password');
+        const emailInput = document.getElementById('email');
+
+        // --- 1. INICIAR SESIÓN NORMAL ---
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Deshabilitar el botón mientras valida
+            btnSubmit.disabled = true;
+            btnSubmit.textContent = "Iniciando sesión...";
+            mensajeBox.style.display = "none";
+
+            const email = emailInput.value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Iniciar sesión con email y contraseña
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+                // Mensaje de éxito
+                mensajeBox.style.display = "block";
+                mensajeBox.style.backgroundColor = "#E8F5E9";
+                mensajeBox.style.color = "#2E7D32";
+                mensajeBox.textContent = "¡Bienvenido de nuevo! Redireccionando...";
+
+                // Redireccionar a la página principal
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1200);
+
+            } catch (error) {
+                console.error("Error al iniciar sesión:", error);
+
+                mensajeBox.style.display = "block";
+                mensajeBox.style.backgroundColor = "#FFEBEE";
+                mensajeBox.style.color = "#C62828";
+
+                // Errores comunes de Firebase Auth
+                if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+                    mensajeBox.textContent = "Correo o contraseña incorrectos.";
+                } else if (error.code === 'auth/too-many-requests') {
+                    mensajeBox.textContent = "Demasiados intentos fallidos. Intenta más tarde.";
+                } else {
+                    mensajeBox.textContent = "Error al iniciar sesión. Intenta nuevamente.";
+                }
+
+                btnSubmit.disabled = false;
+                btnSubmit.textContent = "Ingresar";
+            }
+        });
+
+        // --- 2. OLVIDÉ MI CONTRASEÑA ---
+        btnForgotPassword.addEventListener('click', async (e) => {
+            e.preventDefault(); // Evitar navegación por defecto
+
+            const email = emailInput.value;
+
+            // Verificar que haya un correo ingresado
+            if (!email) {
+                mensajeBox.style.display = "block";
+                mensajeBox.style.backgroundColor = "#FFF3CD";
+                mensajeBox.style.color = "#856404";
+                mensajeBox.textContent = "Escribe tu correo arriba para enviarte el enlace de recuperación.";
+                emailInput.focus();
+                return;
+            }
+
+            try {
+                // Enviar el correo de recuperación mediante Firebase
+                await sendPasswordResetEmail(auth, email);
+
+                mensajeBox.style.display = "block";
+                mensajeBox.style.backgroundColor = "#E8F5E9";
+                mensajeBox.style.color = "#2E7D32";
+                mensajeBox.textContent = "Correo enviado. Revisa tu bandeja de entrada o spam para cambiar tu contraseña.";
+
+            } catch (error) {
+                console.error("Error al enviar correo de recuperación:", error);
+
+                mensajeBox.style.display = "block";
+                mensajeBox.style.backgroundColor = "#FFEBEE";
+                mensajeBox.style.color = "#C62828";
+
+                if (error.code === 'auth/user-not-found') {
+                    mensajeBox.textContent = "No existe ninguna cuenta vinculada a este correo.";
+                } else if (error.code === 'auth/invalid-email') {
+                    mensajeBox.textContent = "El formato del correo no es válido.";
+                } else {
+                    mensajeBox.textContent = "Error al enviar el correo. Intenta de nuevo.";
+                }
+            }
+        });
+    </script>
+
 </body>
 </html>

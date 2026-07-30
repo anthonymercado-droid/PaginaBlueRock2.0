@@ -1,0 +1,183 @@
+/* --------------------------------------------------
+   PÁGINA MIS CITAS - BLUE ROCK
+-------------------------------------------------- */
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+/* Banner superior de perfil */
+.profile-banner {
+    background: linear-gradient(135deg, #7B4E57 0%, #5C3640 100%);
+    color: white;
+    padding: 35px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(92, 54, 64, 0.2);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-banner-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.profile-banner-text p {
+    font-size: 0.95rem;
+    color: #F8F2EF;
+    opacity: 0.9;
+}
+
+/* Encabezados de sección */
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: #5C3640;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, #8D6670, transparent);
+    margin-left: 10px;
+}
+
+/* Tarjetas de Citas */
+.appointments-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.appointment-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px 28px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(141, 102, 112, 0.15);
+    border-left: 6px solid #7B4E57;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.appointment-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.09);
+}
+
+.appointment-card.past {
+    border-left-color: #B0A1A5;
+    background: #FAF8F7;
+}
+
+.appointment-info h3 {
+    color: #6B3D49;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.appointment-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 6px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.detail-item strong {
+    color: #333;
+}
+
+/* Badges de estado */
+.badge {
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-upcoming {
+    background: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid #C8E6C9;
+}
+
+.badge-completed {
+    background: #F0EDED;
+    color: #6D6D6D;
+    border: 1px solid #E0DADA;
+}
+
+/* Estado Vacío */
+.empty-state {
+    background: white;
+    padding: 45px 30px;
+    border-radius: 18px;
+    text-align: center;
+    color: #777;
+    border: 1px dashed #D6C7CB;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.empty-state p {
+    font-size: 1rem;
+    color: #6B3D49;
+}
+
+.btn-agendar-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 28px;
+    background: #8D5664;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-agendar-link:hover {
+    background: #6B3D49;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .appointment-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .profile-banner {
+        padding: 25px;
+    }
+}

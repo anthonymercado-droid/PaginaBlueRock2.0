@@ -1,27 +1,48 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    min-height:100vh;
-    background:#F8F2EF;
-    font-family:'Poppins',sans-serif;
+body {
+    min-height: 100vh;
+    background: #F8F2EF;
+    font-family: 'Poppins', sans-serif;
 }
 
-header{
-    width:90%;
-    margin:auto;
-    padding:30px 0;
+/* --------------------------------------------------
+   HEADER Y NAVEGACIÓN
+-------------------------------------------------- */
+header {
+    width: 90%;
+    margin: auto;
+    padding: 30px 0;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.logo{
-    text-align:center;
+/* Reserva espacio para mantener el título en el medio */
+#left-header-action,
+#right-header-action {
+    width: 220px; 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#left-header-action {
+    justify-content: flex-start;
+}
+
+#right-header-action {
+    justify-content: flex-end;
+}
+
+/* Logo Centrado */
+.logo {
+    text-align: center;
 }
 
 .logo a,
@@ -32,36 +53,31 @@ header{
     text-decoration: none;
 }
 
-.titulo-logo{
-    font-family:'Cormorant Garamond',serif;
-    font-size:70px;
-    color:#6B3D49;
-    border: 0;
-}
-
-.titulo-logo a,
-.titulo-logo a:hover,
-.titulo-logo a:active {
+.titulo-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 70px;
     color: #6B3D49;
-    border-bottom: none;
-    text-decoration: none;
+    border: 0;
+    line-height: 1;
 }
 
-.logo p{
-    letter-spacing:5px;
-    color:#8D6670;
-    font-size:14px;
+.logo p {
+    letter-spacing: 5px;
+    color: #8D6670;
+    font-size: 14px;
+    margin-top: 5px;
 }
 
-.btn-header{
-    padding:14px 28px;
-    border:2px solid #8D6670;
-    background:transparent;
-    border-radius:12px;
-    font-size:18px;
-    color:#6B3D49;
-    cursor:pointer;
-    transition:.3s;
+/* Botones Izquierda (Registrarse y Mis Citas) */
+.btn-header {
+    padding: 12px 24px;
+    border: 2px solid #8D6670;
+    background: transparent;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #6B3D49;
+    cursor: pointer;
+    transition: .3s;
 }
 
 .btn-header a,
@@ -72,20 +88,25 @@ header{
     text-decoration: none;
 }
 
+.btn-header:hover {
+    transform: translateY(-3px);
+    background-color: rgba(141, 102, 112, 0.1);
+}
 
-.btn-login{
-    padding:14px 28px;
-    background:#7B4E57;
-    border:2px solid #8D6670;
-    border-radius:12px;
-    font-size:18px;
-    color:white;
-    cursor:pointer;
-    transition:.3s;
+/* Botón Iniciar Sesión (Derecha) */
+.btn-login {
+    padding: 14px 28px;
+    background: #7B4E57;
+    border: 2px solid #8D6670;
+    border-radius: 12px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
 }
 
 .btn-login:hover {
-    transform:translateY(-3px);
+    transform: translateY(-3px);
 }
 
 .btn-login a,
@@ -96,131 +117,157 @@ header{
     text-decoration: none;
 }
 
-.btn-header:hover{
-    transform:translateY(-3px);
+/* --------------------------------------------------
+   PANEL DE USUARIO (DERECHA AL INICIAR SESIÓN)
+-------------------------------------------------- */
+.user-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
 }
 
-.cards{
-    width:90%;
-    margin:auto; 
-
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:40px;
+.user-greeting {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #6B3D49;
+    white-space: nowrap;
 }
 
-.card{
-    background:white;
-    border-radius:25px;
-    overflow:hidden;
-
-    text-align:center;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.12);
-
-    transition:.3s;
+.btn-logout {
+    background: transparent;
+    border: 1.5px solid #8D6670;
+    color: #8D6670;
+    padding: 4px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.card:hover{
-    transform:translateY(-10px);
+.btn-logout:hover {
+    background-color: #7B4E57;
+    color: white;
+    border-color: #7B4E57;
 }
 
-.img{
-    height:300px;
-    background-size:cover;
-    background-position:center;
+/* --------------------------------------------------
+   SECCIÓN CARDS & BENEFICIOS
+-------------------------------------------------- */
+.cards {
+    width: 90%;
+    margin: 40px auto; 
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
 }
 
-.img1{
-    background-image:url(img/izquierda.jpg);
+.card {
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    transition: .3s;
 }
 
-.img2{
-    background-image:url(img/Derecha.jpg);
+.card:hover {
+    transform: translateY(-10px);
 }
 
-.icono{
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    background:#7B4E57;
-    color:white;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-size:40px;
-
-    margin:-45px auto 20px;
-    border:5px solid white;
+.img {
+    height: 300px;
+    background-size: cover;
+    background-position: center;
 }
 
-.card h2{
-    font-family:'Cormorant Garamond',serif;
-    font-size:55px;
-    color:#5C3640;
+.img1 {
+    background-image: url(img/izquierda.jpg);
 }
 
-.card p{
-    width:70%;
-    margin:20px auto;
-    color:#555;
+.img2 {
+    background-image: url(img/Derecha.jpg);
 }
 
-.btn-card{
-    margin-bottom:35px;
-    padding:16px 40px;
+.icono {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #7B4E57;
+    color: white;
 
-    border:none;
-    border-radius:12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    background:#8D5664;
-    color:white;
-
-    font-size:18px;
-    cursor:pointer;
-
-    transition:.3s;
+    font-size: 40px;
+    margin: -45px auto 20px;
+    border: 5px solid white;
 }
 
-.btn-card:hover{
-    background:#6B3D49;
+.card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 55px;
+    color: #5C3640;
+}
+
+.card p {
+    width: 70%;
+    margin: 20px auto;
+    color: #555;
+}
+
+.btn-card {
+    margin-bottom: 35px;
+    padding: 16px 40px;
+    border: none;
+    border-radius: 12px;
+    background: #8D5664;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-card:hover {
+    background: #6B3D49;
 }
 
 .btn-card a,
 .btn-card a:hover,
-.btn-card a:active{
+.btn-card a:active {
     color: white;
     text-decoration: none;
     border-bottom: none;
 }
 
-.beneficios{
-    width:90%;
-    margin:50px auto;
+.beneficios {
+    width: 90%;
+    margin: 50px auto;
 
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
 }
 
-.beneficio{
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    text-align:center;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
+.beneficio {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    color: #5C3640;
+    font-weight: 500;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
 }
 
-footer{
-    background:#7B4E57;
-    color:white;
+footer {
+    background: #7B4E57;
+    color: white;
+    padding: 30px 5%;
 
-    padding:30px;
-
-    display:flex;
-    justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-

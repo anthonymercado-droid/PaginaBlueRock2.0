@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Citas - Blue Rock</title>
+    
+    <!-- Fuentes Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- CSS Separados -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/MisCitas.css">
+</head>
+<body>
+
+<header>
+    <div id="left-header-action">
+        <a href="index.html" class="btn-header">← Inicio</a>
+    </div>
+
+    <div class="logo">
+        <a href="index.html">  
+            <h1 class="titulo-logo">Blue Rock</h1>
+        </a>
+        <p>BELLEZA • CONFIANZA • BIENESTAR</p>
+    </div>
+
+    <div id="right-header-action">
+        <div id="auth-user" class="user-panel">
+            <span class="user-greeting" id="user-display-name">👤 Cargando...</span>
+            <button class="btn-logout" id="btn-cerrar-sesion">Cerrar Sesión</button>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Banner Personalizado -->
+    <section class="profile-banner">
+        <div class="profile-banner-text">
+            <h2>Bienvenido a tu Espacio</h2>
+            <p>Consulta tus citas programadas e historial de tratamientos en un solo lugar.</p>
+        </div>
+    </section>
+
+    <!-- PRÓXIMA CITA -->
+    <h2 class="section-title">📅 Próxima Cita</h2>
+    <div id="proxima-cita-container" class="appointments-grid">
+        <div class="empty-state">Buscando información de tus citas...</div>
+    </div>
+
+    <!-- HISTORIAL DE TRATAMIENTOS -->
+    <h2 class="section-title" style="margin-top: 50px;">📜 Historial de Tratamientos</h2>
+    <div id="historial-container" class="appointments-grid">
+        <div class="empty-state">Cargando historial...</div>
+    </div>
+
+</main>
+
+<footer>
+    <p>Tu belleza, nuestra pasión ❤</p>
+    <p>© 2026 Blue Rock</p>
+</footer>
+
+<!-- SCRIPT FIREBASE -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, collection, query, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyArRVa6N2XNwdYQKiR7drCqECMczH-JPQ0",
+        authDomain: "bluerock-ee20b.firebaseapp.com",
+        projectId: "bluerock-ee20b",
+        storageBucket: "bluerock-ee20b.firebasestorage.app",
+        messagingSenderId: "944470168965",
+        appId: "1:944470168965:web:2d7cfd42773b9573d060ec"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const proximaCitaContainer = document.getElementById('proxima-cita-container');
+    const historialContainer = document.getElementById('historial-container');
+    const userNameLabel = document.getElementById('user-display-name');
+    const btnLogout = document.getElementById('btn-cerrar-sesion');
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            // Cargar nombre del usuario desde Firestore si existe
+            try {
+                const userDocRef = doc(db, "usuario", user.uid);
+                const userDocSnap = await getDoc(userDocRef);
+                if (userDocSnap.exists()) {
+                    userNameLabel.textContent = `👤 ${userDocSnap.data().nombre}`;
+                } else {
+                    userNameLabel.textContent = `👤 ${user.email}`;
+                }
+            } catch (e) {
+                userNameLabel.textContent = `👤 ${user.email}`;
+            }
+
+            // Consultar Firestore para traer las citas del usuario actual
+            try {
+                const q = query(collection(db, "citas"), where("usuarioId", "==", user.uid));
+                const querySnapshot = await getDocs(q);
+
+                let citasProximas = [];
+                let citasPasadas = [];
+                const hoy = new Date().toISOString().split('T')[0];
+
+                querySnapshot.forEach((doc) => {
+                    const cita = doc.data();
+                    if (cita.fecha >= hoy) {
+                        citasProximas.push(cita);
+                    } else {
+                        citasPasadas.push(cita);
+                    }
+                });
+
+                // Renderizar Próxima Cita
+                if (citasProximas.length > 0) {
+                    citasProximas.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+                    const proxima = citasProximas[0];
+
+                    proximaCitaContainer.innerHTML = `
+                        <div class="appointment-card">
+                            <div class="appointment-info">
+                                <h3>✨ ${proxima.servicio}</h3>
+                                <div class="appointment-details">
+                                    <span class="detail-item">📆 <strong>Fecha:</strong> ${proxima.fecha}</span>
+                                    <span class="detail-item">⏰ <strong>Hora:</strong> ${proxima.hora}</span>
+                                    <span class="detail-item">👤 <strong>Reserva:</strong> ${proxima.nombre}</span>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge badge-upcoming">● Confirmada</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    proximaCitaContainer.innerHTML = `
+                        <div class="empty-state">
+                            <p>No tienes citas programadas próximamente.</p>
+                            <a href="Cita.html" class="btn-agendar-link">Agendar Nueva Cita</a>
+                        </div>
+                    `;
+                }
+
+                // Renderizar Historial de Tratamientos
+                if (citasPasadas.length > 0) {
+                    historialContainer.innerHTML = citasPasadas.map(cita => `
+                        <div class="appointment-card past">
+                            <div class="appointment-info">
+                                <h3>🌿 ${cita.servicio}</h3>
+                                <div class="appointment-details">
+                                    <span class="detail-item">📆 <strong>Realizado el:</strong> ${cita.fecha}</span>
+                                    <span class="detail-item">⏰ <strong>Hora:</strong> ${cita.hora}</span>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge badge-completed">✔ Completado</span>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    historialContainer.innerHTML = `
+                        <div class="empty-state">
+                            <p>Aún no cuentas con un historial de tratamientos realizados.</p>
+                        </div>
+                    `;
+                }
+
+            } catch (error) {
+                console.error("Error al cargar citas:", error);
+                proximaCitaContainer.innerHTML = `<div class="empty-state"><p>Error al cargar la información.</p></div>`;
+            }
+
+        } else {
+            window.location.href = "SignIn.html";
+        }
+    });
+
+    btnLogout.addEventListener('click', async () => {
+        await signOut(auth);
+        window.location.href = "index.html";
+    });
+</script>
+
+</body>
+</html>
