@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendar Cita - Blue Rock</title>
-    
-    <!-- Fuentes Google Fonts -->
+    <title>Ficha de Salud - Blue Rock</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <!-- Archivo CSS -->
-    <link rel="stylesheet" href="css/Cita.css">
+    <link rel="stylesheet" href="css/info.css">
 </head>
 <body>
 
@@ -25,7 +21,7 @@
     </header>
 
     <div class="form-container">
-        <form>
+        <form id="healthForm">
             <div class="grid-container">
                 
                 <!-- COLUMNA IZQUIERDA -->
@@ -33,127 +29,102 @@
                   
                     <!-- BLOQUE 1 -->
                     <div class="block">
-                        <div class="block-header">👤 BLOQUE 1: DATOS PERSONALES</div>
-                        <div class="form-group inline">
-                            <label>Nombre completo:</label>
-                            <input type="text">
-                        </div>
-                        <div class="form-group inline">
-                            <label>Edad:</label>
-                            <input type="text" class="input-edad">
-                        </div>
-                        <div class="form-group inline">
-                            <label>Dirección:</label>
-                            <input type="text">
-                        </div>
-                        <div class="form-group inline">
-                            <label>Teléfono:</label>
-                            <input type="text">
-                        </div>
-                        <div class="form-group inline">
-                            <label>Correo:</label>
-                            <input type="text">
-                        </div>
-                    </div>
-
-                    <!-- BLOQUE 2 -->
-                    <div class="block">
-                        <div class="block-header">🩺 BLOQUE 2: INFORMACIÓN DE SALUD</div>
+                        <div class="block-header">🩺 BLOQUE 1: INFORMACIÓN DE SALUD</div>
                     
                         <div class="form-group">
                             <label>¿Está embarazada?</label>
                             <div class="options">
-                                <label><input type="radio" name="embarazada"> Sí</label>
-                                <label><input type="radio" name="embarazada"> No</label>
+                                <label><input type="radio" name="embarazada" value="Si"> Sí</label>
+                                <label><input type="radio" name="embarazada" value="No" checked> No</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>¿Padece alguna enfermedad?</label>
                             <div class="options">
-                                <label><input type="radio" name="enfermedad"> Sí</label>
-                                <label><input type="radio" name="enfermedad"> No</label>
+                                <label><input type="radio" name="enfermedad" value="Si"> Sí</label>
+                                <label><input type="radio" name="enfermedad" value="No" checked> No</label>
                             </div>
-                            <input type="text" placeholder="¿Cuál?" class="input-sub">
+                            <input type="text" id="enfermedadDetalle" placeholder="¿Cuál?" class="input-sub">
                         </div>
 
                         <div class="form-group">
                             <label>¿Toma medicamentos?</label>
                             <div class="options">
-                                <label><input type="radio" name="medicamentos"> Sí</label>
-                                <label><input type="radio" name="medicamentos"> No</label>
+                                <label><input type="radio" name="medicamentos" value="Si"> Sí</label>
+                                <label><input type="radio" name="medicamentos" value="No" checked> No</label>
                             </div>
-                            <input type="text" placeholder="¿Cuáles?" class="input-sub">
+                            <input type="text" id="medicamentosDetalle" placeholder="¿Cuáles?" class="input-sub">
                         </div>
 
                         <div class="form-group">
                             <label>¿Tiene alergias?</label>
                             <div class="options">
-                                <label><input type="radio" name="alergias"> Sí</label>
-                                <label><input type="radio" name="alergias"> No</label>
+                                <label><input type="radio" name="alergias" value="Si"> Sí</label>
+                                <label><input type="radio" name="alergias" value="No" checked> No</label>
                             </div>
-                            <input type="text" placeholder="¿A qué?" class="input-sub">
+                            <input type="text" id="alergiasDetalle" placeholder="¿A qué?" class="input-sub">
                         </div>
                     </div>
 
-                    <!-- BLOQUE 3 -->
+                    <!-- BLOQUE 2 -->
                     <div class="block">
-                        <div class="block-header">🧠 BLOQUE 3: HÁBITOS DE VIDA</div>
+                        <div class="block-header">🧠 BLOQUE 2: HÁBITOS DE VIDA</div>
                     
                         <div class="form-group">
                             <label>Agua diaria:</label>
                             <div class="options">
-                                <label><input type="radio" name="agua"> Baja</label>
-                                <label><input type="radio" name="agua"> Media</label>
-                                <label><input type="radio" name="agua"> Alta</label>
+                                <label><input type="radio" name="agua" value="Baja"> Baja</label>
+                                <label><input type="radio" name="agua" value="Media" checked> Media</label>
+                                <label><input type="radio" name="agua" value="Alta"> Alta</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Sueño:</label>
                             <div class="options">
-                                <label><input type="radio" name="sueno"> Bueno</label>
-                                <label><input type="radio" name="sueno"> Regular</label>
-                                <label><input type="radio" name="sueno"> Malo</label>
+                                <label><input type="radio" name="sueno" value="Bueno" checked> Bueno</label>
+                                <label><input type="radio" name="sueno" value="Regular"> Regular</label>
+                                <label><input type="radio" name="sueno" value="Malo"> Malo</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Estrés:</label>
                             <div class="options">
-                                <label><input type="radio" name="estres"> Bajo</label>
-                                <label><input type="radio" name="estres"> Medio</label>
-                                <label><input type="radio" name="estres"> Alto</label>
+                                <label><input type="radio" name="estres" value="Bajo"> Bajo</label>
+                                <label><input type="radio" name="estres" value="Medio" checked> Medio</label>
+                                <label><input type="radio" name="estres" value="Alto"> Alto</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>¿Fuma?</label>
                             <div class="options">
-                                <label><input type="radio" name="fuma"> Sí</label>
-                                <label><input type="radio" name="fuma"> No</label>
+                                <label><input type="radio" name="fuma" value="Si"> Sí</label>
+                                <label><input type="radio" name="fuma" value="No" checked> No</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>¿Alcohol?</label>
                             <div class="options">
-                                <label><input type="radio" name="alcohol"> Sí</label>
-                                <label><input type="radio" name="alcohol"> No</label>
+                                <label><input type="radio" name="alcohol" value="Si"> Sí</label>
+                                <label><input type="radio" name="alcohol" value="No" checked> No</label>
                             </div>
                         </div>
                     </div>
 
-                    <!-- BLOQUE 4 -->
+                    <!-- BLOQUE 3 -->
                     <div class="block">
-                        <div class="block-header">🍽️ BLOQUE 4: ALIMENTACIÓN</div>
+                        <div class="block-header">🍽️ BLOQUE 3: ALIMENTACIÓN</div>
                         <div class="options vertical-options">
-                            <label><input type="checkbox"> Balanceada</label>
-                            <label><input type="checkbox"> Alta en grasas</label>
-                            <label><input type="checkbox"> Alta en azúcares</label>
+                            <label><input type="checkbox" name="alimentacion" value="Balanceada"> Balanceada</label>
+                            <label><input type="checkbox" name="alimentacion" value="Alta en grasas"> Alta en grasas</label>
+                            <label><input type="checkbox" name="alimentacion" value="Alta en azúcares"> Alta en azúcares</label>
                             <div class="form-group inline margin-0">
-                                <label><input type="checkbox"> Otro:</label>
-                                <input type="text">
+                                <label><input type="checkbox" name="alimentacion" value="Otro"> Otro:</label>
+                                <input type="text" id="alimentacionOtro">
                             </div>
                         </div>
                     </div>
@@ -163,95 +134,95 @@
                 <!-- COLUMNA DERECHA -->
                 <div class="column">
                   
-                    <!-- BLOQUE 5 -->
+                    <!-- BLOQUE 4 -->
                     <div class="block">
-                        <div class="block-header">🧴 BLOQUE 5: RUTINA DE CUIDADO</div>
+                        <div class="block-header">🧴 BLOQUE 4: RUTINA DE CUIDADO</div>
                     
                         <div class="form-group">
                             <label>¿Limpia su rostro?</label>
                             <div class="options">
-                                <label><input type="radio" name="limpia"> Sí</label>
-                                <label><input type="radio" name="limpia"> No</label>
+                                <label><input type="radio" name="limpia" value="Si" checked> Sí</label>
+                                <label><input type="radio" name="limpia" value="No"> No</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>¿Usa protector solar?</label>
                             <div class="options">
-                                <label><input type="radio" name="protector"> Sí</label>
-                                <label><input type="radio" name="protector"> No</label>
+                                <label><input type="radio" name="protector" value="Si" checked> Sí</label>
+                                <label><input type="radio" name="protector" value="No"> No</label>
                             </div>
                         </div>
 
                         <label class="label-productos">Productos que utiliza:</label>
                         <div class="form-group inline">
                             <label>Limpiador:</label>
-                            <input type="text">
+                            <input type="text" id="prodLimpiador">
                         </div>
                         <div class="form-group inline">
                             <label>Hidratante:</label>
-                            <input type="text">
+                            <input type="text" id="prodHidratante">
                         </div>
                         <div class="form-group inline">
                             <label>Protector solar:</label>
-                            <input type="text">
+                            <input type="text" id="prodProtector">
                         </div>
                         <div class="form-group inline">
                             <label>Otros:</label>
-                            <input type="text">
+                            <input type="text" id="prodOtros">
                         </div>
                     </div>
 
-                    <!-- BLOQUE 6 -->
+                    <!-- BLOQUE 5 -->
                     <div class="block">
-                        <div class="block-header">☀️ BLOQUE 6: EXPOSICIÓN AL SOL</div>
+                        <div class="block-header">☀️ BLOQUE 5: EXPOSICIÓN AL SOL Y OBJETIVOS</div>
                     
                         <div class="form-group">
                             <label>¿Se expone frecuentemente?</label>
                             <div class="options">
-                                <label><input type="radio" name="sol"> Sí</label>
-                                <label><input type="radio" name="sol"> No</label>
+                                <label><input type="radio" name="sol" value="Si"> Sí</label>
+                                <label><input type="radio" name="sol" value="No" checked> No</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Uso de protector:</label>
                             <div class="options">
-                                <label><input type="radio" name="uso_prot"> Siempre</label>
-                                <label><input type="radio" name="uso_prot"> A veces</label>
-                                <label><input type="radio" name="uso_prot"> Nunca</label>
+                                <label><input type="radio" name="uso_prot" value="Siempre"> Siempre</label>
+                                <label><input type="radio" name="uso_prot" value="A veces"> A veces</label>
+                                <label><input type="radio" name="uso_prot" value="Nunca"> Nunca</label>
                             </div>
                         </div>
 
                         <div class="options grid-options">
-                            <label><input type="checkbox"> Acné</label>
-                            <label><input type="checkbox"> Manchas</label>
-                            <label><input type="checkbox"> Hidratación</label>
-                            <label><input type="checkbox"> Rejuvenecimiento</label>
-                            <label><input type="checkbox"> Control de grasa</label>
+                            <label><input type="checkbox" name="objetivos" value="Acné"> Acné</label>
+                            <label><input type="checkbox" name="objetivos" value="Manchas"> Manchas</label>
+                            <label><input type="checkbox" name="objetivos" value="Hidratación"> Hidratación</label>
+                            <label><input type="checkbox" name="objetivos" value="Rejuvenecimiento"> Rejuvenecimiento</label>
+                            <label><input type="checkbox" name="objetivos" value="Control de grasa"> Control de grasa</label>
                         </div>
                         <div class="form-group inline margin-top-8">
-                            <label><input type="checkbox"> Otro:</label>
-                            <input type="text">
+                            <label><input type="checkbox" name="objetivos" value="Otro"> Otro:</label>
+                            <input type="text" id="objetivosOtro">
                         </div>
                     </div>
 
-                    <!-- BLOQUE 8 -->
+                    <!-- BLOQUE 6 -->
                     <div class="block">
-                        <div class="block-header">📝 BLOQUE 8: OBSERVACIONES</div>
-                        <textarea rows="6" placeholder="Escribe aquí las observaciones..."></textarea>
+                        <div class="block-header">📝 BLOQUE 6: OBSERVACIONES</div>
+                        <textarea id="observaciones" rows="4" placeholder="Escribe aquí las observaciones..."></textarea>
                     </div>
 
-                    <!-- BLOQUE 9 -->
+                    <!-- BLOQUE 7 -->
                     <div class="block consent">
-                        <div class="block-header">✍️ BLOQUE 9: CONSENTIMIENTO</div>
+                        <div class="block-header">✍️ BLOQUE 7: CONSENTIMIENTO</div>
                         <p class="consent-text">
                             "Declaro que la información proporcionada es verídica."
                         </p>
 
                         <div class="signature-container">
-                            <label>Firma:</label>
-                            <input type="text">
+                            <label>Firma (Nombre completo):</label>
+                            <input type="text" id="firmaDigital" required>
                             <div class="signature-line"></div>
                         </div>
                     </div>
@@ -260,9 +231,101 @@
 
             </div>
 
-            <button type="submit" class="btn-submit">Guardar Ficha</button>
+            <button type="submit" class="btn-submit" id="btnGuardar">Guardar Ficha de Salud</button>
         </form>
     </div>
 
+    <!-- SCRIPT FIREBASE Y CAPTURA DE PLANILLA -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyArRVa6N2XNwdYQKiR7drCqECMczH-JPQ0",
+            authDomain: "bluerock-ee20b.firebaseapp.com",
+            projectId: "bluerock-ee20b",
+            storageBucket: "bluerock-ee20b.firebasestorage.app",
+            messagingSenderId: "944470168965",
+            appId: "1:944470168965:web:2d7cfd42773b9573d060ec"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const healthForm = document.getElementById('healthForm');
+        const btnGuardar = document.getElementById('btnGuardar');
+
+        healthForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Obtener el ID del usuario actual de la sesión/URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const usuarioId = urlParams.get('usuarioId') || localStorage.getItem("usuarioId") || "USR_TEMPORAL";
+
+            btnGuardar.disabled = true;
+            btnGuardar.innerText = "Guardando Ficha...";
+
+            // CAPTURAR TODA LA PLANILLA DE SALUD EN UN SOLO OBJETO
+            const fichaSalud = {
+                informacionGeneral: {
+                    embarazada: document.querySelector('input[name="embarazada"]:checked')?.value || "No",
+                    enfermedad: document.querySelector('input[name="enfermedad"]:checked')?.value || "No",
+                    enfermedadDetalle: document.getElementById('enfermedadDetalle').value,
+                    medicamentos: document.querySelector('input[name="medicamentos"]:checked')?.value || "No",
+                    medicamentosDetalle: document.getElementById('medicamentosDetalle').value,
+                    alergias: document.querySelector('input[name="alergias"]:checked')?.value || "No",
+                    alergiasDetalle: document.getElementById('alergiasDetalle').value
+                },
+                habitosVida: {
+                    agua: document.querySelector('input[name="agua"]:checked')?.value,
+                    sueno: document.querySelector('input[name="sueno"]:checked')?.value,
+                    estres: document.querySelector('input[name="estres"]:checked')?.value,
+                    fuma: document.querySelector('input[name="fuma"]:checked')?.value,
+                    alcohol: document.querySelector('input[name="alcohol"]:checked')?.value
+                },
+                alimentacion: Array.from(document.querySelectorAll('input[name="alimentacion"]:checked')).map(cb => cb.value),
+                rutinaCuidado: {
+                    limpiaRostro: document.querySelector('input[name="limpia"]:checked')?.value,
+                    usaProtectorSolar: document.querySelector('input[name="protector"]:checked')?.value,
+                    productos: {
+                        limpiador: document.getElementById('prodLimpiador').value,
+                        hidratante: document.getElementById('prodHidratante').value,
+                        protector: document.getElementById('prodProtector').value,
+                        otros: document.getElementById('prodOtros').value
+                    }
+                },
+                exposicionSolObjetivos: {
+                    seExpone: document.querySelector('input[name="sol"]:checked')?.value,
+                    frecuenciaProtector: document.querySelector('input[name="uso_prot"]:checked')?.value,
+                    objetivosTratamiento: Array.from(document.querySelectorAll('input[name="objetivos"]:checked')).map(cb => cb.value)
+                },
+                observaciones: document.getElementById('observaciones').value,
+                consentimiento: {
+                    firmado: true,
+                    nombreFirma: document.getElementById('firmaDigital').value,
+                    fechaFirma: new Date().toISOString().split('T')[0]
+                },
+                actualizadoEn: new Date().toISOString()
+            };
+
+            try {
+                // Guardar la planilla dentro de la tabla 'usuarios'
+                await setDoc(doc(db, "usuarios", usuarioId), {
+                    usuarioId: usuarioId,
+                    fichaSalud: fichaSalud,
+                    actualizadoEn: serverTimestamp()
+                }, { merge: true }); // 'merge: true' evita borrar los datos de nombre/correo que ya tenía el usuario
+
+                alert("¡Ficha de Salud guardada exitosamente!");
+                window.location.href = "MisCitas.html";
+
+            } catch (error) {
+                console.error("Error al guardar la planilla de salud: ", error);
+                alert("Ocurrió un error al guardar la planilla.");
+                btnGuardar.disabled = false;
+                btnGuardar.innerText = "Guardar Ficha de Salud";
+            }
+        });
+    </script>
 </body>
 </html>

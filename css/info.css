@@ -1,0 +1,227 @@
+/* VARIABLES CSS DE COLOR */
+:root {
+    --bg-body: #F8F2EF;
+    --card-bg: #FFFFFF;
+    --text-color: #4A3B3E;
+    --header-text: #6B3D49;
+    --header-bg: #F0E6E5;
+    --accent-color: #7B4E57;
+    --border-color: #D3C2C4;
+}
+
+/* RESETEO GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--bg-body);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ENCABEZADO / HEADER */
+header {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px 0 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    text-align: center;
+}
+
+.logo a,
+.logo a:hover,
+.logo a:active {
+    color: var(--header-text);
+    text-decoration: none;
+}
+
+.titulo-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 60px;
+    color: var(--header-text);
+    line-height: 1;
+}
+
+.logo p {
+    letter-spacing: 4px;
+    color: #8D6670;
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+/* CONTENEDOR PRINCIPAL (Igual al de citas) */
+.form-container {
+    background-color: var(--card-bg);
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(107, 61, 73, 0.08);
+}
+
+/* ESTRUCTURA EN DOS COLUMNAS */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* SECCIONES Y BLOQUES */
+.block {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.block-header {
+    font-size: 1.1rem;
+    color: var(--header-text);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+/* CAMPOS Y ETIQUETAS */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group.inline {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+/* OPCIONES (RADIOS Y CHECKBOXES) */
+.options {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+}
+
+.options.vertical-options {
+    flex-direction: column;
+    gap: 8px;
+}
+
+.options.grid-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.options label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+/* ENTRADAS DE TEXTO (Entradas idénticas a la pantalla de cita) */
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    outline: none;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: var(--accent-color);
+}
+
+.input-sub {
+    margin-top: 4px;
+}
+
+.label-productos {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+.margin-0 { margin: 0; }
+.margin-top-8 { margin-top: 8px; }
+
+/* CONSENTIMIENTO Y FIRMA */
+.consent-text {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+}
+
+.signature-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+/* BOTÓN DE ENVÍO (Igual al de citas) */
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-submit:hover {
+    background-color: var(--header-text);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    .options.grid-options {
+        grid-template-columns: 1fr;
+    }
+}

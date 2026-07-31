@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Citas - Blue Rock</title>
+    <title>Mis Citas y Recomendaciones - Blue Rock</title>
     
     <!-- Fuentes Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,20 +42,99 @@
     <section class="profile-banner">
         <div class="profile-banner-text">
             <h2>Bienvenido a tu Espacio</h2>
-            <p>Consulta tus citas programadas e historial de tratamientos en un solo lugar.</p>
+            <p>Consulta tus citas programadas, historial y recomendaciones personalizadas en un solo lugar.</p>
         </div>
     </section>
 
     <!-- PRÓXIMA CITA -->
-    <h2 class="section-title">📅 Próxima Cita</h2>
+    <h2 class="section-title">Próxima Cita</h2>
     <div id="proxima-cita-container" class="appointments-grid">
         <div class="empty-state">Buscando información de tus citas...</div>
     </div>
 
     <!-- HISTORIAL DE TRATAMIENTOS -->
-    <h2 class="section-title" style="margin-top: 50px;">📜 Historial de Tratamientos</h2>
+    <h2 class="section-title" style="margin-top: 50px;">Historial de Tratamientos</h2>
     <div id="historial-container" class="appointments-grid">
         <div class="empty-state">Cargando historial...</div>
+    </div>
+
+    <!-- RECOMENDACIÓN DE TRATAMIENTOS -->
+    <h2 class="section-title" style="margin-top: 50px;">Tratamientos Recomendados para Ti</h2>
+    <div class="cards-grid">
+        <div class="info-card">
+            <div class="info-card-header">
+                <span class="card-icon"></span>
+                <h3>Hidratación Profunda</h3>
+            </div>
+            <p>Ideal si notas la piel deshidratada o expuesta al sol recientemente. Ayuda a restaurar la barrera cutánea.</p>
+            <span class="badge-recommendation">Frecuencia recomendada: Cada 30 días</span>
+            <a href="Cita.html?servicio=hidratacion-facial" class="btn-card-action">Agendar este servicio</a>
+        </div>
+
+        <div class="info-card">
+            <div class="info-card-header">
+                <span class="card-icon"></span>
+                <h3>Masaje Relajante Corporal</h3>
+            </div>
+            <p>Perfecto para liberar la tensión acumulada y complementar tus tratamientos de cuidado facial.</p>
+            <span class="badge-recommendation">Frecuencia recomendada: Según necesidad</span>
+            <a href="Cita.html" class="btn-card-action">Agendar este servicio</a>
+        </div>
+    </div>
+
+    <!-- RUTINAS DE CUIDADO FACIAL -->
+    <h2 class="section-title" style="margin-top: 50px;">Tu Rutina de Cuidado Diario</h2>
+    <div class="routine-container">
+        <div class="routine-block">
+            <h3>Rutina de Mañana</h3>
+            <ol class="routine-steps">
+                <li><strong>Limpiador suave:</strong> Remueve impurezas acumuladas durante la noche.</li>
+                <li><strong>Sérum Hidratante:</strong> Aplica 3 gotas de ácido hialurónico con toques suaves.</li>
+                <li><strong>Crema Hidratante:</strong> Sella la hidratación antes del maquillaje.</li>
+                <li><strong>Protector Solar (SPF 50+):</strong> Indispensable cada 3-4 horas.</li>
+            </ol>
+        </div>
+
+        <div class="routine-block">
+            <h3>Rutina de Noche</h3>
+            <ol class="routine-steps">
+                <li><strong>Doble Limpieza:</strong> Usa desmaquillante o agua micelar, luego tu limpiador facial.</li>
+                <li><strong>Tónico Reequilibrante:</strong> Restaura el pH natural de tu piel.</li>
+                <li><strong>Tratamiento Específico:</strong> Sérum reparador o renovador nocturno.</li>
+                <li><strong>Crema Nutritiva:</strong> Aporta regeneración profunda mientras duermes.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- RECOMENDACIÓN DE PRODUCTOS COSMÉTICOS -->
+    <h2 class="section-title" style="margin-top: 50px;">Tu Kit de Cuidado Diario Recomendado</h2>
+    <div class="cards-grid">
+        <div class="product-card">
+            <div>
+                <span class="product-tag">Mañana y Noche</span>
+                <h3>Limpiador Facial Suave</h3>
+                <p>Gel limpiador de uso diario. Elimina impurezas y exceso de grasa sin resecar la piel.</p>
+            </div>
+            <span class="product-price">$24.00 USD</span>
+        </div>
+
+        <div class="product-card">
+            <div>
+                <span class="product-tag">Mañana y Noche</span>
+                <h3>Crema Hidratante Ligera</h3>
+                <p>Fórmula básica de rápida absorción para mantener la piel suave y protegida todo el día.</p>
+            </div>
+            <span class="product-price">$30.00 USD</span>
+        </div>
+
+        <div class="product-card">
+            <div>
+                <span class="product-tag">Todas las mañanas</span>
+                <h3>Protector Solar Facial SPF 50+</h3>
+                <p>De uso diario obligatorio. Textura ligera que protege contra los rayos UV sin dejar toque graso.</p>
+            </div>
+            <span class="product-price">$28.00 USD</span>
+        </div>
     </div>
 
 </main>
@@ -66,10 +145,11 @@
 </footer>
 
 <!-- SCRIPT FIREBASE -->
+<!-- SCRIPT FIREBASE CON FORMATO AM/PM Y BUSQUEDA DE NOMBRE MEJORADA -->
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, collection, query, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, collection, query, where, onSnapshot, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyArRVa6N2XNwdYQKiR7drCqECMczH-JPQ0",
@@ -89,32 +169,75 @@
     const userNameLabel = document.getElementById('user-display-name');
     const btnLogout = document.getElementById('btn-cerrar-sesion');
 
+    let unsubscribeCitas = null;
+
+    // Función auxiliar para convertir formato "15:00" o "15:00 PM" a formato "03:00 PM"
+    function formatearHora12h(horaStr) {
+        if (!horaStr) return 'Por determinar';
+        
+        // Si ya incluye AM o PM, devolverlo tal cual
+        if (horaStr.toUpperCase().includes('AM') || horaStr.toUpperCase().includes('PM')) {
+            return horaStr;
+        }
+
+        const partes = horaStr.split(':');
+        let horas = parseInt(partes[0], 10);
+        const minutos = partes[1] || '00';
+
+        if (isNaN(horas)) return horaStr;
+
+        const ampm = horas >= 12 ? 'PM' : 'AM';
+        horas = horas % 12;
+        horas = horas ? horas : 12; // La hora 0 (medianoche) pasa a ser 12
+
+        const horasFormateadas = horas < 10 ? `0${horas}` : horas;
+        return `${horasFormateadas}:${minutos} ${ampm}`;
+    }
+
     onAuthStateChanged(auth, async (user) => {
         if (user) {
-            // Cargar nombre del usuario desde Firestore si existe
+            // 1. Cargar nombre del usuario desde Firestore (búsqueda robusta)
             try {
-                const userDocRef = doc(db, "usuario", user.uid);
-                const userDocSnap = await getDoc(userDocRef);
-                if (userDocSnap.exists()) {
-                    userNameLabel.textContent = `👤 ${userDocSnap.data().nombre}`;
+                let userData = null;
+
+                // Intenta buscar en las colecciones más comunes donde guardas los datos del cliente
+                const colecciones = ["usuarios", "usuario", "users"];
+                for (const col of colecciones) {
+                    const snap = await getDoc(doc(db, col, user.uid));
+                    if (snap.exists()) {
+                        userData = snap.data();
+                        break;
+                    }
+                }
+
+                // Extrae el campo correcto según como se haya registrado
+                const nombreEncontrado = userData ? (userData.nombre || userData.name || userData.nombreUsuario || userData.fullName) : null;
+
+                if (nombreEncontrado) {
+                    userNameLabel.textContent = `👤 ${nombreEncontrado}`;
+                } else if (user.displayName) {
+                    userNameLabel.textContent = `👤 ${user.displayName}`;
                 } else {
-                    userNameLabel.textContent = `👤 ${user.email}`;
+                    // Si no hay nombre registrado, muestra solo el nombre de usuario de su correo
+                    const nombreEmail = user.email ? user.email.split('@')[0] : 'Usuario';
+                    userNameLabel.textContent = `👤 ${nombreEmail}`;
                 }
             } catch (e) {
-                userNameLabel.textContent = `👤 ${user.email}`;
+                console.error("Error al cargar perfil de usuario:", e);
+                const nombreEmail = user.email ? user.email.split('@')[0] : 'Usuario';
+                userNameLabel.textContent = `👤 ${nombreEmail}`;
             }
 
-            // Consultar Firestore para traer las citas del usuario actual
-            try {
-                const q = query(collection(db, "citas"), where("usuarioId", "==", user.uid));
-                const querySnapshot = await getDocs(q);
-
+            // 2. Escuchar citas en tiempo real
+            const q = query(collection(db, "citas"), where("usuarioId", "==", user.uid));
+            
+            unsubscribeCitas = onSnapshot(q, (querySnapshot) => {
                 let citasProximas = [];
                 let citasPasadas = [];
                 const hoy = new Date().toISOString().split('T')[0];
 
-                querySnapshot.forEach((doc) => {
-                    const cita = doc.data();
+                querySnapshot.forEach((docSnap) => {
+                    const cita = docSnap.data();
                     if (cita.fecha >= hoy) {
                         citasProximas.push(cita);
                     } else {
@@ -122,19 +245,20 @@
                     }
                 });
 
-                // Renderizar Próxima Cita
+                // RENDERIZAR PRÓXIMA CITA
                 if (citasProximas.length > 0) {
                     citasProximas.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
                     const proxima = citasProximas[0];
+                    const horaFormateada = formatearHora12h(proxima.hora);
 
                     proximaCitaContainer.innerHTML = `
                         <div class="appointment-card">
                             <div class="appointment-info">
-                                <h3>✨ ${proxima.servicio}</h3>
+                                <h3>✨ ${proxima.servicio || 'Servicio Agendado'}</h3>
                                 <div class="appointment-details">
                                     <span class="detail-item">📆 <strong>Fecha:</strong> ${proxima.fecha}</span>
-                                    <span class="detail-item">⏰ <strong>Hora:</strong> ${proxima.hora}</span>
-                                    <span class="detail-item">👤 <strong>Reserva:</strong> ${proxima.nombre}</span>
+                                    <span class="detail-item">⏰ <strong>Hora:</strong> ${horaFormateada}</span>
+                                    <span class="detail-item">👤 <strong>Reserva:</strong> ${proxima.nombre || 'Cliente'}</span>
                                 </div>
                             </div>
                             <div>
@@ -151,15 +275,16 @@
                     `;
                 }
 
-                // Renderizar Historial de Tratamientos
+                // RENDERIZAR HISTORIAL DE TRATAMIENTOS
                 if (citasPasadas.length > 0) {
+                    citasPasadas.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
                     historialContainer.innerHTML = citasPasadas.map(cita => `
                         <div class="appointment-card past">
                             <div class="appointment-info">
-                                <h3>🌿 ${cita.servicio}</h3>
+                                <h3>🌿 ${cita.servicio || 'Tratamiento'}</h3>
                                 <div class="appointment-details">
                                     <span class="detail-item">📆 <strong>Realizado el:</strong> ${cita.fecha}</span>
-                                    <span class="detail-item">⏰ <strong>Hora:</strong> ${cita.hora}</span>
+                                    <span class="detail-item">⏰ <strong>Hora:</strong> ${formatearHora12h(cita.hora)}</span>
                                 </div>
                             </div>
                             <div>
@@ -174,13 +299,13 @@
                         </div>
                     `;
                 }
-
-            } catch (error) {
-                console.error("Error al cargar citas:", error);
-                proximaCitaContainer.innerHTML = `<div class="empty-state"><p>Error al cargar la información.</p></div>`;
-            }
+            }, (error) => {
+                console.error("Error escuchando citas:", error);
+                proximaCitaContainer.innerHTML = `<div class="empty-state"><p>Error al obtener los datos de la base de datos.</p></div>`;
+            });
 
         } else {
+            if (unsubscribeCitas) unsubscribeCitas();
             window.location.href = "SignIn.html";
         }
     });

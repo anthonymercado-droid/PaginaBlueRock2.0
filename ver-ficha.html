@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Ficha de Salud - Blue Rock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/info.css">
+    <style>
+        .ficha-resumen {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .dato-item {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+        .dato-item strong {
+            color: var(--header-text);
+        }
+        .tag {
+            display: inline-block;
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin: 2px;
+        }
+        .buscar-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html">  
+                <h1 class="titulo-logo">Blue Rock</h1>
+            </a>
+            <p>CONSULTA DE FICHA DE SALUD</p>
+        </div>
+    </header>
+
+    <div class="form-container">
+        <!-- BUSCADOR DE USUARIO -->
+        <div class="buscar-box">
+            <input type="text" id="inputUsuarioId" placeholder="Ingresa el ID del usuario (ej: USR_TEMPORAL)">
+            <button type="button" class="btn-submit" id="btnBuscar" style="margin-top:0; width: 180px;">Buscar Ficha</button>
+        </div>
+
+        <div id="resultadoFicha" style="display: none;">
+            <div class="grid-container">
+                
+                <!-- COLUMNA IZQUIERDA -->
+                <div class="column">
+                    <div class="block">
+                        <div class="block-header">🩺 INFORMACIÓN DE SALUD</div>
+                        <div class="dato-item"><strong>¿Embarazada?:</strong> <span id="valEmbarazada">-</span></div>
+                        <div class="dato-item"><strong>Enfermedades:</strong> <span id="valEnfermedad">-</span></div>
+                        <div class="dato-item"><strong>Medicamentos:</strong> <span id="valMedicamentos">-</span></div>
+                        <div class="dato-item"><strong>Alergias:</strong> <span id="valAlergias">-</span></div>
+                    </div>
+
+                    <div class="block">
+                        <div class="block-header">🧠 HÁBITOS DE VIDA</div>
+                        <div class="dato-item"><strong>Agua:</strong> <span id="valAgua">-</span></div>
+                        <div class="dato-item"><strong>Sueño:</strong> <span id="valSueno">-</span></div>
+                        <div class="dato-item"><strong>Estrés:</strong> <span id="valEstres">-</span></div>
+                        <div class="dato-item"><strong>Fuma:</strong> <span id="valFuma">-</span> | <strong>Alcohol:</strong> <span id="valAlcohol">-</span></div>
+                    </div>
+
+                    <div class="block">
+                        <div class="block-header">🍽️ ALIMENTACIÓN</div>
+                        <div id="valAlimentacion">-</div>
+                    </div>
+                </div>
+
+                <!-- COLUMNA DERECHA -->
+                <div class="column">
+                    <div class="block">
+                        <div class="block-header">🧴 RUTINA Y PRODUCTOS</div>
+                        <div class="dato-item"><strong>Limpia rostro:</strong> <span id="valLimpia">-</span></div>
+                        <div class="dato-item"><strong>Protector solar:</strong> <span id="valProtector">-</span></div>
+                        <div class="dato-item"><strong>Limpiador:</strong> <span id="valProdLimpiador">-</span></div>
+                        <div class="dato-item"><strong>Hidratante:</strong> <span id="valProdHidratante">-</span></div>
+                        <div class="dato-item"><strong>Protector:</strong> <span id="valProdProtector">-</span></div>
+                    </div>
+
+                    <div class="block">
+                        <div class="block-header">☀️ OBJETIVOS DEL TRATAMIENTO</div>
+                        <div class="dato-item"><strong>Exposición al sol:</strong> <span id="valSol">-</span></div>
+                        <div id="valObjetivos">-</div>
+                    </div>
+
+                    <div class="block">
+                        <div class="block-header">📝 OBSERVACIONES Y FIRMA</div>
+                        <div class="dato-item"><strong>Notas:</strong> <span id="valObservaciones">-</span></div>
+                        <div class="dato-item"><strong>Firmado por:</strong> <span id="valFirma">-</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyArRVa6N2XNwdYQKiR7drCqECMczH-JPQ0",
+            authDomain: "bluerock-ee20b.firebaseapp.com",
+            projectId: "bluerock-ee20b",
+            storageBucket: "bluerock-ee20b.firebasestorage.app",
+            messagingSenderId: "944470168965",
+            appId: "1:944470168965:web:2d7cfd42773b9573d060ec"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const btnBuscar = document.getElementById('btnBuscar');
+        const inputUsuarioId = document.getElementById('inputUsuarioId');
+        const resultadoFicha = document.getElementById('resultadoFicha');
+
+        btnBuscar.addEventListener('click', async () => {
+            const usuarioId = inputUsuarioId.value.trim();
+            if (!usuarioId) {
+                alert("Escribe un ID de usuario");
+                return;
+            }
+
+            try {
+                const docRef = doc(db, "usuarios", usuarioId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists() && docSnap.data().fichaSalud) {
+                    const ficha = docSnap.data().fichaSalud;
+                    resultadoFicha.style.display = "block";
+
+                    // Llenar datos
+                    document.getElementById('valEmbarazada').innerText = ficha.informacionGeneral?.embarazada || "No";
+                    document.getElementById('valEnfermedad').innerText = ficha.informacionGeneral?.enfermedadDetalle || ficha.informacionGeneral?.enfermedad;
+                    document.getElementById('valMedicamentos').innerText = ficha.informacionGeneral?.medicamentosDetalle || ficha.informacionGeneral?.medicamentos;
+                    document.getElementById('valAlergias').innerText = ficha.informacionGeneral?.alergiasDetalle || ficha.informacionGeneral?.alergias;
+
+                    document.getElementById('valAgua').innerText = ficha.habitosVida?.agua || "-";
+                    document.getElementById('valSueno').innerText = ficha.habitosVida?.sueno || "-";
+                    document.getElementById('valEstres').innerText = ficha.habitosVida?.estres || "-";
+                    document.getElementById('valFuma').innerText = ficha.habitosVida?.fuma || "No";
+                    document.getElementById('valAlcohol').innerText = ficha.habitosVida?.alcohol || "No";
+
+                    document.getElementById('valAlimentacion').innerHTML = (ficha.alimentacion || []).map(a => `<span class="tag">${a}</span>`).join(' ') || "Ninguno";
+
+                    document.getElementById('valLimpia').innerText = ficha.rutinaCuidado?.limpiaRostro || "-";
+                    document.getElementById('valProtector').innerText = ficha.rutinaCuidado?.usaProtectorSolar || "-";
+                    document.getElementById('valProdLimpiador').innerText = ficha.rutinaCuidado?.productos?.limpiador || "N/A";
+                    document.getElementById('valProdHidratante').innerText = ficha.rutinaCuidado?.productos?.hidratante || "N/A";
+                    document.getElementById('valProdProtector').innerText = ficha.rutinaCuidado?.productos?.protector || "N/A";
+
+                    document.getElementById('valSol').innerText = ficha.exposicionSolObjetivos?.seExpone || "-";
+                    document.getElementById('valObjetivos').innerHTML = (ficha.exposicionSolObjetivos?.objetivosTratamiento || []).map(o => `<span class="tag">${o}</span>`).join(' ') || "Ninguno";
+
+                    document.getElementById('valObservaciones').innerText = ficha.observaciones || "Sin observaciones";
+                    document.getElementById('valFirma').innerText = ficha.consentimiento?.nombreFirma || "No firmado";
+
+                } else {
+                    alert("No se encontró ninguna ficha de salud guardada para este usuario.");
+                    resultadoFicha.style.display = "none";
+                }
+            } catch (error) {
+                console.error("Error al buscar ficha:", error);
+                alert("Error al obtener los datos de Firestore.");
+            }
+        });
+    </script>
+</body>
+</html>
