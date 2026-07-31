@@ -271,3 +271,17 @@ footer {
     justify-content: space-between;
     align-items: center;
 }
+
+.conocenos {
+    color: white;
+        text-decoration: none;
+    border-bottom: none;
+}
+
+.conocenos a,
+.conocenos a:hover,
+.conocenos a:active {
+    color: white;
+    text-decoration: none;
+    border-bottom: none;
+}
