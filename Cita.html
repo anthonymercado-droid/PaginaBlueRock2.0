@@ -151,7 +151,7 @@
 
                 </div>
             </div>
-            <button type="submit" class="btn-submit" id="btnSubmit">Continuar a la Ficha de Salud ➔</button>
+            <button type="submit" class="btn-submit" id="btnSubmit">Confirmar Cita</button>
         </form>
     </div>
 
@@ -159,7 +159,7 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, doc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     // Configuración de tu proyecto de Firebase
     const firebaseConfig = {
@@ -185,7 +185,6 @@
         if (user) {
             usuarioActual = user;
         } else {
-            // Si el usuario no está logueado, lo redirigimos a iniciar sesión
             alert("Debes iniciar sesión para reservar una cita.");
             window.location.href = "SignIn.html";
         }
@@ -228,21 +227,20 @@
             const docRef = await addDoc(collection(db, "citas"), {
                 usuarioId: usuarioId,
                 servicios: serviciosSeleccionados,
-                servicio: serviciosSeleccionados.join(", "), // Formato texto para visualización rápida
+                servicio: serviciosSeleccionados.join(", "),
                 fecha: fechaSeleccionada,
                 hora: horaSeleccionada,
-                estado: "confirmada",
+                estado: "pendiente",
                 creadoEn: serverTimestamp()
             });
 
             sessionStorage.setItem("citaIdActual", docRef.id);
 
-            // 3. CONSULTAR SI EL USUARIO YA TIENE FICHA DE SALUD
-            // (Asegúrate de que la colección donde guardas las fichas se llame 'fichasSalud' o 'fichaSalud')
-            const qFicha = query(collection(db, "fichaSalud"), where("usuarioId", "==", usuarioId));
-            const querySnapshot = await getDocs(qFicha);
+            // 3. CONSULTAR SI EL USUARIO YA TIENE FICHA DE SALUD EN SU DOCUMENTO
+            const userDocRef = doc(db, "usuarios", usuarioId);
+            const userDocSnap = await getDoc(userDocRef);
 
-            if (!querySnapshot.empty) {
+            if (userDocSnap.exists() && userDocSnap.data().fichaSalud) {
                 // YA TIENE FICHA: Redirigir directamente a Mis Citas
                 alert("¡Cita reservada con éxito!");
                 window.location.href = "MisCitas.html";
@@ -258,7 +256,7 @@
             btnSubmit.disabled = false;
             btnSubmit.innerText = "Continuar ➔";
         }
-    });
+    }); 
 </script>
 </body>
 </html> 
