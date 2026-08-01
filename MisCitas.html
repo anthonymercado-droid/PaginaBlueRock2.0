@@ -115,7 +115,7 @@
                 <h3>Limpiador Facial Suave</h3>
                 <p>Gel limpiador de uso diario. Elimina impurezas y exceso de grasa sin resecar la piel.</p>
             </div>
-            <span class="product-price">$24.00 USD</span>
+            <span class="product-price">RD$750.00</span>
         </div>
 
         <div class="product-card">
@@ -124,7 +124,7 @@
                 <h3>Crema Hidratante Ligera</h3>
                 <p>Fórmula básica de rápida absorción para mantener la piel suave y protegida todo el día.</p>
             </div>
-            <span class="product-price">$30.00 USD</span>
+            <span class="product-price">RD$1000.00</span>
         </div>
 
         <div class="product-card">
@@ -133,7 +133,7 @@
                 <h3>Protector Solar Facial SPF 50+</h3>
                 <p>De uso diario obligatorio. Textura ligera que protege contra los rayos UV sin dejar toque graso.</p>
             </div>
-            <span class="product-price">$28.00 USD</span>
+            <span class="product-price">RD$1200.00</span>
         </div>
     </div>
 
@@ -146,6 +146,7 @@
 
 <!-- SCRIPT FIREBASE -->
 <!-- SCRIPT FIREBASE CON FORMATO AM/PM Y BUSQUEDA DE NOMBRE MEJORADA -->
+<!-- SCRIPT FIREBASE CON SOPORTE PARA ESTADO DE LA CITA EN TIEMPO REAL -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -171,11 +172,9 @@
 
     let unsubscribeCitas = null;
 
-    // Función auxiliar para convertir formato "15:00" o "15:00 PM" a formato "03:00 PM"
     function formatearHora12h(horaStr) {
         if (!horaStr) return 'Por determinar';
         
-        // Si ya incluye AM o PM, devolverlo tal cual
         if (horaStr.toUpperCase().includes('AM') || horaStr.toUpperCase().includes('PM')) {
             return horaStr;
         }
@@ -188,7 +187,7 @@
 
         const ampm = horas >= 12 ? 'PM' : 'AM';
         horas = horas % 12;
-        horas = horas ? horas : 12; // La hora 0 (medianoche) pasa a ser 12
+        horas = horas ? horas : 12;
 
         const horasFormateadas = horas < 10 ? `0${horas}` : horas;
         return `${horasFormateadas}:${minutos} ${ampm}`;
@@ -196,11 +195,9 @@
 
     onAuthStateChanged(auth, async (user) => {
         if (user) {
-            // 1. Cargar nombre del usuario desde Firestore (búsqueda robusta)
+            // 1. Cargar nombre del usuario desde Firestore
             try {
                 let userData = null;
-
-                // Intenta buscar en las colecciones más comunes donde guardas los datos del cliente
                 const colecciones = ["usuarios", "usuario", "users"];
                 for (const col of colecciones) {
                     const snap = await getDoc(doc(db, col, user.uid));
@@ -210,7 +207,6 @@
                     }
                 }
 
-                // Extrae el campo correcto según como se haya registrado
                 const nombreEncontrado = userData ? (userData.nombre || userData.name || userData.nombreUsuario || userData.fullName) : null;
 
                 if (nombreEncontrado) {
@@ -218,7 +214,6 @@
                 } else if (user.displayName) {
                     userNameLabel.textContent = `👤 ${user.displayName}`;
                 } else {
-                    // Si no hay nombre registrado, muestra solo el nombre de usuario de su correo
                     const nombreEmail = user.email ? user.email.split('@')[0] : 'Usuario';
                     userNameLabel.textContent = `👤 ${nombreEmail}`;
                 }
@@ -228,7 +223,7 @@
                 userNameLabel.textContent = `👤 ${nombreEmail}`;
             }
 
-            // 2. Escuchar citas en tiempo real
+            // 2. Escuchar citas en tiempo real evaluando el estado
             const q = query(collection(db, "citas"), where("usuarioId", "==", user.uid));
             
             unsubscribeCitas = onSnapshot(q, (querySnapshot) => {
@@ -238,10 +233,13 @@
 
                 querySnapshot.forEach((docSnap) => {
                     const cita = docSnap.data();
-                    if (cita.fecha >= hoy) {
-                        citasProximas.push(cita);
-                    } else {
+                    const estado = (cita.estado || '').toLowerCase();
+
+                    // Si la cita fue marcada como realizada/completada desde Android o si la fecha ya pasó
+                    if (estado === 'realizada' || estado === 'completada' || cita.fecha < hoy) {
                         citasPasadas.push(cita);
+                    } else {
+                        citasProximas.push(cita);
                     }
                 });
 
@@ -250,19 +248,24 @@
                     citasProximas.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
                     const proxima = citasProximas[0];
                     const horaFormateada = formatearHora12h(proxima.hora);
+                    
+                    // Capitalizar primera letra del estado para mostrar en el badge
+                    const estadoTexto = proxima.estado 
+                        ? proxima.estado.charAt(0).toUpperCase() + proxima.estado.slice(1) 
+                        : 'Pendiente';
 
                     proximaCitaContainer.innerHTML = `
                         <div class="appointment-card">
                             <div class="appointment-info">
-                                <h3>✨ ${proxima.servicio || 'Servicio Agendado'}</h3>
+                                <h3> ${proxima.servicio || 'Servicio Agendado'}</h3>
                                 <div class="appointment-details">
-                                    <span class="detail-item">📆 <strong>Fecha:</strong> ${proxima.fecha}</span>
-                                    <span class="detail-item">⏰ <strong>Hora:</strong> ${horaFormateada}</span>
-                                    <span class="detail-item">👤 <strong>Reserva:</strong> ${proxima.nombre || 'Cliente'}</span>
+                                    <span class="detail-item"> <strong>Fecha:</strong> ${proxima.fecha}</span>
+                                    <span class="detail-item"> <strong>Hora:</strong> ${horaFormateada}</span>
+                                    <span class="detail-item"> <strong>Reserva:</strong> ${proxima.nombre || 'Cliente'}</span>
                                 </div>
                             </div>
                             <div>
-                                <span class="badge badge-upcoming">● Confirmada</span>
+                                <span class="badge badge-upcoming">● ${estadoTexto}</span>
                             </div>
                         </div>
                     `;
@@ -283,12 +286,12 @@
                             <div class="appointment-info">
                                 <h3>🌿 ${cita.servicio || 'Tratamiento'}</h3>
                                 <div class="appointment-details">
-                                    <span class="detail-item">📆 <strong>Realizado el:</strong> ${cita.fecha}</span>
-                                    <span class="detail-item">⏰ <strong>Hora:</strong> ${formatearHora12h(cita.hora)}</span>
+                                    <span class="detail-item"> <strong>Realizado el:</strong> ${cita.fecha}</span>
+                                    <span class="detail-item"> <strong>Hora:</strong> ${formatearHora12h(cita.hora)}</span>
                                 </div>
                             </div>
                             <div>
-                                <span class="badge badge-completed">✔ Completado</span>
+                                <span class="badge badge-completed">✔ Realizado</span>
                             </div>
                         </div>
                     `).join('');
