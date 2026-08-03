@@ -77,7 +77,16 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { 
+        getFirestore, 
+        collection, 
+        getDocs, 
+        addDoc, 
+        doc, 
+        updateDoc, 
+        increment, 
+        serverTimestamp 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     // CONFIGURACIÓN DE BLUEROCK
     const firebaseConfig = {
@@ -109,11 +118,12 @@
             gridContainer.innerHTML = '';
             productosCache = [];
 
-            querySnapshot.forEach((doc) => {
-                const producto = { id: doc.id, ...doc.data() };
+            querySnapshot.forEach((docSnap) => {
+                const producto = { id: docSnap.id, ...docSnap.data() };
                 const precioNumerico = Number(producto.precio || 0);
                 const stockDisponible = Number(producto.stock || 0);
                 producto.precio = precioNumerico;
+                producto.stock = stockDisponible;
                 productosCache.push(producto);
                 
                 const productCard = document.createElement('div');
@@ -153,7 +163,7 @@
         const existe = carrito.find(item => item.id === id);
         if (existe) {
             if (producto.stock && existe.cantidad >= producto.stock) {
-                alert(`Solo hay ${producto.stock} unidades disponibles.`);
+                alert(`Solo quedan ${producto.stock} unidades disponibles.`);
                 return;
             }
             existe.cantidad++;
@@ -173,6 +183,12 @@
     window.cambiarCantidad = function(id, cambio) {
         const item = carrito.find(p => p.id === id);
         if (!item) return;
+
+        const productoBase = productosCache.find(p => p.id === id);
+        if (cambio > 0 && productoBase && item.cantidad >= productoBase.stock) {
+            alert(`Solo quedan ${productoBase.stock} unidades disponibles.`);
+            return;
+        }
 
         item.cantidad += cambio;
         if (item.cantidad <= 0) {
@@ -239,7 +255,7 @@
         totalLabel.textContent = `$${totalAcumulado.toFixed(2)}`;
     }
 
-    // 3. Proceso de Pago y Guardado en Firestore ('citas')
+    // 3. Proceso de Pago, Guardado en Firestore ('citas') y Reducción de Stock
     window.procesarCompra = function() {
         if (carrito.length === 0) return;
         document.getElementById('payment-modal').classList.add('active');
@@ -250,6 +266,10 @@
     };
 
     window.confirmarCompra = async function() {
+        const btnConfirmar = document.querySelector('.btn-confirm');
+        btnConfirmar.disabled = true;
+        btnConfirmar.textContent = "Procesando...";
+
         const metodoPago = document.querySelector('input[name="metodo_pago"]:checked').value;
         const totalCalculado = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
 
@@ -262,7 +282,7 @@
         }));
 
         try {
-            // Guardar documento en la colección "citas"
+            // 1. Guardar documento en la colección "citas"
             await addDoc(collection(db, "citas"), {
                 productos: productosLlevar,
                 metodoPago: metodoPago,
@@ -271,17 +291,32 @@
                 fechaCreacion: serverTimestamp()
             });
 
-            alert(`¡Pedido registrado exitosamente!\nMétodo de pago seleccionador: ${metodoPago}`);
+            // 2. Reducir el stock de cada producto comprado en la colección "productos"
+            const promesasStock = carrito.map(item => {
+                const productoRef = doc(db, "productos", item.id);
+                return updateDoc(productoRef, {
+                    stock: increment(-item.cantidad)
+                });
+            });
 
-            // Resetear carrito y modales
+            // Esperar a que se actualicen todos los stocks en Firestore
+            await Promise.all(promesasStock);
+
+            alert(`¡Pedido registrado exitosamente!\nMétodo de pago seleccionado: ${metodoPago}`);
+
+            // 3. Resetear carrito, modales y recargar catálogo con los nuevos stocks
             carrito = [];
             guardarYActualizar();
             cerrarModalPago();
             toggleCart();
+            await cargarProductos();
 
         } catch (error) {
-            console.error("Error al registrar el pedido en citas:", error);
+            console.error("Error al procesar la compra o actualizar stock:", error);
             alert("Ocurrió un error al procesar tu compra. Por favor, intenta de nuevo.");
+        } finally {
+            btnConfirmar.disabled = false;
+            btnConfirmar.textContent = "Confirmar Pedido";
         }
     };
 
