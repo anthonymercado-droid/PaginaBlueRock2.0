@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Fuentes Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <!-- Archivo CSS -->
     <link rel="stylesheet" href="css/Tienda.css">
+    <title>Blue Rock - Tienda</title>
 </head>
 <body>
 
@@ -20,6 +18,9 @@
             </a>
             <p>BELLEZA • CONFIANZA • BIENESTAR</p>
         </div>
+        <button id="cart-icon-btn" class="cart-icon-btn" onclick="toggleCart()">
+            🛒 Carrito <span id="cart-count">0</span>
+        </button>
     </header>
 
     <main class="shop-container">
@@ -27,82 +28,264 @@
             <h2>Nuestros Productos</h2>
             <p>Cuidado facial profesional directo a tu rutina diaria</p>
         </div>
-
-        <!-- Contenedor donde se cargarán los productos dinámicamente desde Firebase -->
         <div id="products-grid" class="products-grid">
             <div class="loading-state">Cargando productos de Blue Rock...</div>
         </div>
     </main>
 
-    <!-- MÓDULO JAVASCRIPT DE FIREBASE -->
-    <script type="module">
-        // Importar módulos necesarios del SDK modular de Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    <!-- OVERLAY Y SIDEBAR DEL CARRITO -->
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
+    
+    <aside id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div id="cart-items" class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn-checkout" onclick="procesarCompra()">Finalizar Compra</button>
+        </div>
+    </aside>
 
-        // ⚠️ REEMPLAZA ESTE OBJETO CON LAS CREDENCIALES DE TU PROYECTO DE FIREBASE
-        const firebaseConfig = {
-            apiKey: "TU_API_KEY",
-            authDomain: "tu-proyecto.firebaseapp.com",
-            projectId: "tu-proyecto-id",
-            storageBucket: "tu-proyecto.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef123456"
-        };
-
-        // Inicializar Firebase y Firestore
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // Función para renderizar los productos desde la colección "productos"
-        async function cargarProductos() {
-            const gridContainer = document.getElementById('products-grid');
+    <!-- MODAL DE SELECCIÓN DE MÉTODO DE PAGO -->
+    <div id="payment-modal" class="modal-overlay">
+        <div class="modal-card">
+            <h3>Finalizar Compra</h3>
+            <p>Selecciona tu método de pago para registrar la orden:</p>
             
-            try {
-                // Referencia a la colección 'productos' en Firestore
-                const querySnapshot = await getDocs(collection(db, "productos"));
-                
-                // Si la colección está vacía
-                if (querySnapshot.empty) {
-                    gridContainer.innerHTML = '<p class="empty-state">No hay productos disponibles por el momento.</p>';
-                    return;
-                }
+            <div class="payment-options">
+                <label class="payment-option">
+                    <input type="radio" name="metodo_pago" value="Efectivo" checked>
+                    <span>Efectivo</span>
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="metodo_pago" value="Transferencia">
+                    <span>Transferencia Bancaria</span>
+                </label>
+            </div>
 
-                // Limpiar mensaje de carga
-                gridContainer.innerHTML = '';
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="cerrarModalPago()">Cancelar</button>
+                <button type="button" class="btn-confirm" onclick="confirmarCompra()">Confirmar Pedido</button>
+            </div>
+        </div>
+    </div>
 
-                // Recorrer los documentos recibidos
-                querySnapshot.forEach((doc) => {
-                    const producto = doc.data();
-                    
-                    // Crear la tarjeta de producto
-                    const productCard = document.createElement('div');
-                    productCard.className = 'product-card';
-                    productCard.innerHTML = `
-                        <div class="product-image-wrap">
-                            <img src="${producto.imagen || 'https://via.placeholder.com/300'}" alt="${producto.nombre}">
-                        </div>
-                        <div class="product-info">
-                            <span class="product-category">${producto.categoria || 'Cuidado Facial'}</span>
-                            <h3 class="product-title">${producto.nombre}</h3>
-                            <p class="product-description">${producto.descripcion || ''}</p>
-                            <div class="product-bottom">
-                                <span class="product-price">$${producto.precio}</span>
-                                <button class="btn-add" onclick="agregarAlCarrito('${doc.id}')">Agregar</button>
-                            </div>
-                        </div>
-                    `;
-                    gridContainer.appendChild(productCard);
-                });
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-            } catch (error) {
-                console.error("Error al obtener los productos: ", error);
-                gridContainer.innerHTML = '<p class="error-state">Error al cargar la tienda. Revisa la configuración de Firebase.</p>';
+    // CONFIGURACIÓN DE BLUEROCK
+    const firebaseConfig = {
+        apiKey: "AIzaSyArRVa6N2XNwdYQKiR7drCqECMczH-JPQ0",
+        authDomain: "bluerock-ee20b.firebaseapp.com",
+        projectId: "bluerock-ee20b",
+        storageBucket: "bluerock-ee20b.firebasestorage.app",
+        messagingSenderId: "944470168965",
+        appId: "1:944470168965:web:2d7cfd42773b9573d060ec"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let productosCache = [];
+    let carrito = JSON.parse(localStorage.getItem('cart_bluerock')) || [];
+
+    // 1. Cargar productos desde Firestore
+    async function cargarProductos() {
+        const gridContainer = document.getElementById('products-grid');
+        try {
+            const querySnapshot = await getDocs(collection(db, "productos"));
+            
+            if (querySnapshot.empty) {
+                gridContainer.innerHTML = '<p class="empty-state">No hay productos disponibles actualmente.</p>';
+                return;
             }
+
+            gridContainer.innerHTML = '';
+            productosCache = [];
+
+            querySnapshot.forEach((doc) => {
+                const producto = { id: doc.id, ...doc.data() };
+                const precioNumerico = Number(producto.precio || 0);
+                const stockDisponible = Number(producto.stock || 0);
+                producto.precio = precioNumerico;
+                productosCache.push(producto);
+                
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image-wrap">
+                        <img src="${producto.imagen || 'https://via.placeholder.com/300'}" alt="${producto.nombre}">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">${producto.categoria || 'Cosmética'}</span>
+                        <h3 class="product-title">${producto.nombre || 'Producto'}</h3>
+                        <p class="product-description">${producto.descripcion || ''}</p>
+                        <div class="product-bottom">
+                            <span class="product-price">$${precioNumerico.toFixed(2)}</span>
+                            <button class="btn-add" 
+                                    onclick="agregarAlCarrito('${producto.id}')" 
+                                    ${stockDisponible <= 0 ? 'disabled' : ''}>
+                                ${stockDisponible > 0 ? 'Agregar' : 'Agotado'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                gridContainer.appendChild(productCard);
+            });
+            actualizarCarritoUI();
+        } catch (error) {
+            console.error("Error Firestore:", error);
+            gridContainer.innerHTML = '<p class="error-state">Error al cargar la tienda. Revisa la conexión.</p>';
+        }
+    }
+
+    // 2. Funciones del Carrito
+    window.agregarAlCarrito = function(id) {
+        const producto = productosCache.find(p => p.id === id);
+        if (!producto) return;
+
+        const existe = carrito.find(item => item.id === id);
+        if (existe) {
+            if (producto.stock && existe.cantidad >= producto.stock) {
+                alert(`Solo hay ${producto.stock} unidades disponibles.`);
+                return;
+            }
+            existe.cantidad++;
+        } else {
+            carrito.push({
+                id: producto.id,
+                nombre: producto.nombre,
+                precio: producto.precio,
+                imagen: producto.imagen,
+                cantidad: 1
+            });
+        }
+        guardarYActualizar();
+        abrirCarrito();
+    };
+
+    window.cambiarCantidad = function(id, cambio) {
+        const item = carrito.find(p => p.id === id);
+        if (!item) return;
+
+        item.cantidad += cambio;
+        if (item.cantidad <= 0) {
+            carrito = carrito.filter(p => p.id !== id);
+        }
+        guardarYActualizar();
+    };
+
+    window.eliminarDelCarrito = function(id) {
+        carrito = carrito.filter(item => item.id !== id);
+        guardarYActualizar();
+    };
+
+    window.toggleCart = function() {
+        document.getElementById('cart-sidebar').classList.toggle('active');
+        document.getElementById('cart-overlay').classList.toggle('active');
+    };
+
+    function abrirCarrito() {
+        document.getElementById('cart-sidebar').classList.add('active');
+        document.getElementById('cart-overlay').classList.add('active');
+    }
+
+    function guardarYActualizar() {
+        localStorage.setItem('cart_bluerock', JSON.stringify(carrito));
+        actualizarCarritoUI();
+    }
+
+    function actualizarCarritoUI() {
+        const container = document.getElementById('cart-items');
+        const countLabel = document.getElementById('cart-count');
+        const totalLabel = document.getElementById('cart-total-price');
+        const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+        countLabel.textContent = totalItems;
+
+        if (carrito.length === 0) {
+            container.innerHTML = '<p class="empty-cart-msg">Tu carrito está vacío.</p>';
+            totalLabel.textContent = '$0.00';
+            return;
         }
 
-        // Ejecutar carga de productos al iniciar
-        window.addEventListener('DOMContentLoaded', cargarProductos);
-    </script>
+        container.innerHTML = '';
+        let totalAcumulado = 0;
+
+        carrito.forEach(item => {
+            totalAcumulado += (item.precio * item.cantidad);
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'cart-item';
+            itemDiv.innerHTML = `
+                <img src="${item.imagen}" alt="${item.nombre}">
+                <div class="cart-item-details">
+                    <h4>${item.nombre}</h4>
+                    <p class="cart-item-price">$${item.precio.toFixed(2)}</p>
+                    <div class="cart-quantity-controls">
+                        <button onclick="cambiarCantidad('${item.id}', -1)">-</button>
+                        <span>${item.cantidad}</span>
+                        <button onclick="cambiarCantidad('${item.id}', 1)">+</button>
+                    </div>
+                </div>
+                <button class="btn-remove" onclick="eliminarDelCarrito('${item.id}')">&times;</button>
+            `;
+            container.appendChild(itemDiv);
+        });
+        totalLabel.textContent = `$${totalAcumulado.toFixed(2)}`;
+    }
+
+    // 3. Proceso de Pago y Guardado en Firestore ('citas')
+    window.procesarCompra = function() {
+        if (carrito.length === 0) return;
+        document.getElementById('payment-modal').classList.add('active');
+    };
+
+    window.cerrarModalPago = function() {
+        document.getElementById('payment-modal').classList.remove('active');
+    };
+
+    window.confirmarCompra = async function() {
+        const metodoPago = document.querySelector('input[name="metodo_pago"]:checked').value;
+        const totalCalculado = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+
+        // Desglose de los productos a llevar
+        const productosLlevar = carrito.map(item => ({
+            id: item.id,
+            nombre: item.nombre,
+            cantidad: item.cantidad,
+            precioUnitario: item.precio
+        }));
+
+        try {
+            // Guardar documento en la colección "citas"
+            await addDoc(collection(db, "citas"), {
+                productos: productosLlevar,
+                metodoPago: metodoPago,
+                total: totalCalculado,
+                estado: "Pendiente",
+                fechaCreacion: serverTimestamp()
+            });
+
+            alert(`¡Pedido registrado exitosamente!\nMétodo de pago seleccionador: ${metodoPago}`);
+
+            // Resetear carrito y modales
+            carrito = [];
+            guardarYActualizar();
+            cerrarModalPago();
+            toggleCart();
+
+        } catch (error) {
+            console.error("Error al registrar el pedido en citas:", error);
+            alert("Ocurrió un error al procesar tu compra. Por favor, intenta de nuevo.");
+        }
+    };
+
+    window.addEventListener('DOMContentLoaded', cargarProductos);
+</script>
 </body>
 </html>
