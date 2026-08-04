@@ -126,14 +126,12 @@ header p {
 /* ===================================================
    GRILLAS (SERVICIOS Y FECHA/HORA)
    =================================================== */
-/* Muestra las tarjetas de servicios de 2 en 2 */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
 }
 
-/* Coloca la fecha arriba y los horarios abajo */
 .datetime-grid {
     display: flex;
     flex-direction: column;
@@ -146,7 +144,7 @@ header p {
     }
 
     .services-grid {
-        grid-template-columns: 1fr; /* En celulares pasa a 1 sola columna */
+        grid-template-columns: 1fr;
     }
 }
 
@@ -198,7 +196,6 @@ header p {
     color: var(--text-muted);
 }
 
-/* Estado Seleccionado de Tarjetas */
 .service-card:has(input[type="checkbox"]:checked) {
     border-color: var(--accent-color);
     background-color: var(--header-bg);
@@ -263,7 +260,6 @@ input[type="date"]:focus {
     border-color: var(--accent-color);
 }
 
-/* Estado Seleccionado de Horarios */
 .time-chip:has(input[type="radio"]:checked) span {
     background-color: var(--accent-color);
     color: white;
@@ -296,4 +292,102 @@ input[type="date"]:focus {
 .btn-submit:disabled {
     background-color: #D3C2C4;
     cursor: not-allowed;
+}
+
+/* ===================================================
+   MODAL DE OFERTA DE TIENDA
+   =================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(85, 51, 59, 0.4);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    background: var(--card-bg);
+    padding: 35px 28px;
+    border-radius: 16px;
+    max-width: 440px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(107, 61, 73, 0.18);
+    border: 1px solid var(--border-color);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-card {
+    transform: translateY(0);
+}
+
+.modal-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--header-text);
+    margin-bottom: 12px;
+}
+
+.modal-card p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-modal-primary {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.btn-modal-primary:hover {
+    background-color: var(--header-text);
+    transform: translateY(-2px);
+}
+
+.btn-modal-secondary {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1.5px solid var(--border-color);
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.btn-modal-secondary:hover {
+    background-color: var(--header-bg);
+    color: var(--header-text);
 }
