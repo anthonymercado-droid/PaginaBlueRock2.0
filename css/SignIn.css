@@ -137,6 +137,12 @@ header{
     text-decoration: underline;
     color: var(--rojo-brand);
 }
+    
+.Registrate {
+    font-size: 0.85rem;
+    color: var(--texto-mutado);
+    text-decoration: none;
+}
 
 /* 6. Botón Principal */
 .btn-submit {
