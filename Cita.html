@@ -40,34 +40,34 @@
                 <h4 class="category-title">Servicios Faciales</h4>
                 <div class="services-grid">
                     <label class="service-card">
-                        <input type="checkbox" name="servicio" value="limpieza-facial-profunda">
+                        <input type="checkbox" name="servicio" value="limpieza-facial-profunda" data-precio="1500" data-nombre="Limpieza Facial Profunda">
                         <div class="card-content">
                             <span class="service-title">Limpieza Facial Profunda</span>
-                            <span class="service-duration">60 min</span>
+                            <span class="service-duration">RD$1,500</span>
                         </div>
                     </label>
 
                     <label class="service-card">
-                        <input type="checkbox" name="servicio" value="exfoliacion-facial">
+                        <input type="checkbox" name="servicio" value="exfoliacion-facial" data-precio="1000" data-nombre="Exfoliación Facial">
                         <div class="card-content">
                             <span class="service-title">Exfoliación Facial</span>
-                            <span class="service-duration">45 min</span>
+                            <span class="service-duration">RD$1,000</span>
                         </div>
                     </label>
 
                     <label class="service-card">
-                        <input type="checkbox" name="servicio" value="tratamientos-faciales">
+                        <input type="checkbox" name="servicio" value="tratamientos-faciales" data-precio="1800" data-nombre="AntiAcné">
                         <div class="card-content">
-                            <span class="service-title">Tratamientos Faciales</span>
-                            <span class="service-duration">60 min</span>
+                            <span class="service-title">AntiAcné</span>
+                            <span class="service-duration">RD$1,800</span>
                         </div>
                     </label>
 
                     <label class="service-card">
-                        <input type="checkbox" name="servicio" value="hidratacion-facial">
+                        <input type="checkbox" name="servicio" value="hidratacion-facial" data-precio="1200" data-nombre="Hidratación Facial">
                         <div class="card-content">
                             <span class="service-title">Hidratación Facial</span>
-                            <span class="service-duration">50 min</span>
+                            <span class="service-duration">RD$1,200</span>
                         </div>
                     </label>
                 </div>
@@ -76,34 +76,34 @@
                 <h4 class="category-title">Servicios Corporales</h4>
                 <div class="services-grid">
                     <label class="service-card">
-                        <input type="checkbox" name="servicio" value="exfoliacion-corporal">
+                        <input type="checkbox" name="servicio" value="exfoliacion-corporal" data-precio="1500" data-nombre="Exfoliación Corporal">
                         <div class="card-content">
                             <span class="service-title">Exfoliación Corporal</span>
-                            <span class="service-duration">60 min</span>
+                            <span class="service-duration">RD$1,500</span>
                         </div>
                     </label>
 
                     <label class="service-card">
-                        <input type="checkbox" name="servicio" value="hidratacion-corporal">
+                        <input type="checkbox" name="servicio" value="hidratacion-corporal" data-precio="1600" data-nombre="Hidratación Corporal">
                         <div class="card-content">
                             <span class="service-title">Hidratación Corporal</span>
-                            <span class="service-duration">60 min</span>
+                            <span class="service-duration">RD$1,600</span>
                         </div>
                     </label>
 
                     <label class="service-card">
-                        <input type="checkbox" name="servicio" value="tratamientos-corporales">
+                        <input type="checkbox" name="servicio" value="tratamientos-corporales" data-precio="2000" data-nombre="Drenaje Linfático Corporal">
                         <div class="card-content">
-                            <span class="service-title">Tratamientos Corporales</span>
-                            <span class="service-duration">75 min</span>
+                            <span class="service-title">Drenaje Linfático Corporal</span>
+                            <span class="service-duration">RD$2,000</span>
                         </div>
                     </label>
 
                     <label class="service-card">
-                        <input type="checkbox" name="servicio" value="masajes-relajantes">
+                        <input type="checkbox" name="servicio" value="masajes-relajantes" data-precio="2500" data-nombre="Exfoliación y Envoltura Corporal">
                         <div class="card-content">
-                            <span class="service-title">Masajes Relajantes</span>
-                            <span class="service-duration">60 min</span>
+                            <span class="service-title">Exfoliación y Envoltura Corporal</span>
+                            <span class="service-duration">RD$2,500</span>
                         </div>
                     </label>
                 </div>
@@ -151,6 +151,35 @@
 
                 </div>
             </div>
+
+            <!-- PASO 3: RESUMEN Y MÉTODO DE PAGO -->
+            <div class="booking-section summary-section">
+                <h3><span class="step-num">3</span> Resumen y Pago</h3>
+                
+                <div class="summary-details" id="listaServiciosResumen">
+                    <p style="color: var(--text-muted); font-style: italic;">No has seleccionado ningún servicio aún.</p>
+                </div>
+                
+                <div class="summary-total">
+                    <span>Total a Pagar:</span>
+                    <span id="montoTotalTexto">RD$0.00</span>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label>Selecciona el Método de Pago:</label>
+                    <div class="payment-options">
+                        <label class="payment-chip">
+                            <input type="radio" name="metodoPago" value="efectivo" required checked>
+                            <span>Efectivo</span>
+                        </label>
+                        <label class="payment-chip">
+                            <input type="radio" name="metodoPago" value="transferencia">
+                            <span>Transferencia</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
             <button type="submit" class="btn-submit" id="btnSubmit">Confirmar Cita</button>
         </form>
     </div>
@@ -167,11 +196,11 @@
         </div>
     </div>
 
-<!-- INTEGRACIÓN CON FIREBASE -->
+<!-- INTEGRACIÓN CON FIREBASE Y LÓGICA DE NEGOCIO -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, doc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, doc, getDoc, getDocs, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyArRVa6N2XNwdYQKiR7drCqECMczH-JPQ0",
@@ -188,13 +217,18 @@
 
     const bookingForm = document.getElementById('bookingForm');
     const btnSubmit = document.getElementById('btnSubmit');
+    const inputFecha = document.getElementById('fecha');
 
     const shopModal = document.getElementById('shopModal');
     const btnGoShop = document.getElementById('btnGoShop');
     const btnContinueFlow = document.getElementById('btnContinueFlow');
 
+    const listaServiciosResumen = document.getElementById('listaServiciosResumen');
+    const montoTotalTexto = document.getElementById('montoTotalTexto');
+
     let usuarioActual = null;
     let urlRedireccionFinal = "";
+    let montoTotalCalculado = 0;
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -205,6 +239,107 @@
         }
     });
 
+    // ======================================================
+    // CÁLCULO DINÁMICO DEL TOTAL Y RESUMEN
+    // ======================================================
+    function calcularTotal() {
+        const checkboxes = document.querySelectorAll('input[name="servicio"]:checked');
+        montoTotalCalculado = 0;
+        
+        if (listaServiciosResumen) {
+            listaServiciosResumen.innerHTML = '';
+        }
+
+        if (checkboxes.length === 0) {
+            if (listaServiciosResumen) {
+                listaServiciosResumen.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">No has seleccionado ningún servicio aún.</p>';
+            }
+            if (montoTotalTexto) {
+                montoTotalTexto.innerText = "RD$0.00";
+            }
+            return 0;
+        }
+
+        checkboxes.forEach(cb => {
+            const precio = parseFloat(cb.dataset.precio) || 0;
+            const nombre = cb.dataset.nombre || cb.value;
+            montoTotalCalculado += precio;
+
+            if (listaServiciosResumen) {
+                const row = document.createElement('div');
+                row.className = 'summary-row';
+                row.innerHTML = `<span>${nombre}</span><span>RD$${precio.toLocaleString()}</span>`;
+                listaServiciosResumen.appendChild(row);
+            }
+        });
+
+        if (montoTotalTexto) {
+            montoTotalTexto.innerText = `RD$${montoTotalCalculado.toLocaleString()}`;
+        }
+
+        return montoTotalCalculado;
+    }
+
+    document.querySelectorAll('input[name="servicio"]').forEach(checkbox => {
+        checkbox.addEventListener('change', calcularTotal);
+    });
+
+    // ======================================================
+    // FUNCIÓN PARA CONSULTAR Y DESHABILITAR HORAS OCUPADAS
+    // ======================================================
+    async function actualizarHorasDisponibles() {
+        const fechaSeleccionada = inputFecha.value;
+        const radiosHora = document.querySelectorAll('input[name="hora"]');
+
+        radiosHora.forEach(radio => {
+            radio.disabled = false;
+            const label = radio.closest('label');
+            if (label) {
+                label.classList.remove('hora-ocupada');
+            }
+        });
+
+        if (!fechaSeleccionada) return;
+
+        try {
+            const q = query(
+                collection(db, "citas"),
+                where("fecha", "==", fechaSeleccionada)
+            );
+
+            const querySnapshot = await getDocs(q);
+            const horasOcupadas = [];
+
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                if (data.estado !== "cancelada" && data.hora) {
+                    horasOcupadas.push(data.hora);
+                }
+            });
+
+            radiosHora.forEach(radio => {
+                if (horasOcupadas.includes(radio.value)) {
+                    radio.disabled = true;
+                    if (radio.checked) radio.checked = false;
+
+                    const label = radio.closest('label');
+                    if (label) {
+                        label.classList.add('hora-ocupada');
+                    }
+                }
+            });
+        } catch (error) {
+            console.error("Error al consultar disponibilidad de horarios: ", error);
+        }
+    }
+
+    if (inputFecha) {
+        inputFecha.addEventListener('change', actualizarHorasDisponibles);
+    }
+
+    // ======================================================
+    // PROCESO DE GUARDADO DE LA RESERVA EN FIRESTORE
+    // ======================================================
     bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -214,13 +349,16 @@
             return;
         }
 
-        const usuarioId = usuarioActual.uid;
+        const totalPagar = calcularTotal();
 
+        const usuarioId = usuarioActual.uid;
         const serviciosCheckboxes = document.querySelectorAll('input[name="servicio"]:checked');
         const serviciosSeleccionados = Array.from(serviciosCheckboxes).map(cb => cb.value);
+        const nombresServicios = Array.from(serviciosCheckboxes).map(cb => cb.dataset.nombre || cb.value);
 
-        const fechaSeleccionada = document.getElementById('fecha').value;
+        const fechaSeleccionada = inputFecha.value;
         const horaSeleccionada = document.querySelector('input[name="hora"]:checked')?.value;
+        const metodoPagoSeleccionado = document.querySelector('input[name="metodoPago"]:checked')?.value || "efectivo";
 
         if (serviciosSeleccionados.length === 0) {
             alert("Por favor selecciona al menos un servicio.");
@@ -236,10 +374,15 @@
             btnSubmit.disabled = true;
             btnSubmit.innerText = "Procesando reserva...";
 
+            // Formato de texto "RD$1,500" para coincidir con el resto de campos String
+            const precioTexto = `RD$${totalPagar.toLocaleString()}`;
+
             const docRef = await addDoc(collection(db, "citas"), {
                 usuarioId: usuarioId,
                 servicios: serviciosSeleccionados,
-                servicio: serviciosSeleccionados.join(", "),
+                servicio: nombresServicios.join(", "),
+                precio: precioTexto, // Se guarda únicamente bajo la clave 'precio'
+                metodoPago: metodoPagoSeleccionado,
                 fecha: fechaSeleccionada,
                 hora: horaSeleccionada,
                 estado: "pendiente",

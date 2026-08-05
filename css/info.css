@@ -1,14 +1,14 @@
 /* VARIABLES CSS DE COLOR */
 :root {
-    --bg-body: #F8F2EF;
+    --bg-body: #F4F5F7;
     --card-bg: #FFFFFF;
-    --text-color: #4A3B3E;
-    --header-text: #6B3D49;
-    --header-bg: #F0E6E5;
-    --accent-color: #7B4E57;
-    --border-color: #D3C2C4;
+    --text-color: #2D3748;
+    --header-text: #1A365D;
+    --header-bg: #E2E8F0;
+    --accent-color: #2B6CB0;
+    --border-color: #CBD5E0;
 }
-
+ 
 /* RESETEO GENERAL */
 * {
     margin: 0;
@@ -57,7 +57,7 @@ header {
 
 .logo p {
     letter-spacing: 4px;
-    color: #8D6670;
+    color: #4A5568;
     font-size: 13px;
     margin-top: 5px;
     font-weight: 600;
@@ -70,7 +70,7 @@ header {
     width: 100%;
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(107, 61, 73, 0.08);
+    box-shadow: 0 8px 24px rgba(26, 54, 93, 0.08);
 }
 
 /* ESTRUCTURA EN DOS COLUMNAS */
@@ -180,7 +180,7 @@ textarea:focus {
 /* CONSENTIMIENTO Y FIRMA */
 .consent-text {
     font-size: 0.85rem;
-    color: #666;
+    color: #718096;
     font-style: italic;
 }
 
