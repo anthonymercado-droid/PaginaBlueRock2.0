@@ -7,7 +7,7 @@
     --texto-mutado: #4A5568;     /* Texto Secundario / Enlaces */
     --borde-radio: 12px;
 } 
- 
+
 /* 2. Reset profesional */
 * {
     box-sizing: border-box;
@@ -17,8 +17,9 @@
 }
 
 body {
-    background-color: var(--gris-fondo);
-    color: var(--texto-oscuro);
+    background-image: url(css/img/titulo.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 header {
@@ -33,6 +34,7 @@ header {
 
 .logo {
     text-align: center;
+    margin-bottom: 25px;
 }
 
 .logo a,
@@ -42,11 +44,26 @@ header {
     text-decoration: none;
 }
 
+/* Contenedor flex para alinear el título y la imagen a la derecha */
+.logo-titulo-contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
 .titulo-logo {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 50px;
+    font-size: 45px;
     color: #1A365D;
     border: 0;
+    line-height: 1;
+}
+
+.imagen-logo-derecha {
+    height: 38px; /* Tamaño ajustado para la tarjeta de inicio de sesión */
+    width: auto;
+    object-fit: contain;
 }
 
 .logo p {
@@ -123,8 +140,10 @@ header {
 
 /* Enlaces y acciones secundarias */
 .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 25px;
-    text-align: right;
 }
 
 .forgot-password {
