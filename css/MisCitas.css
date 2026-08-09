@@ -7,14 +7,15 @@
     max-width: 900px;
     margin: 40px auto;
 }
-
+ 
 /* Banner superior de perfil */
 .profile-banner {
-    background: linear-gradient(135deg, #7B4E57 0%, #5C3640 100%);
+    background: linear-gradient(135deg, #2B6CB0 0%, #1A365D 100%);
     color: white;
     padding: 35px 40px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(92, 54, 64, 0.2);
+    border: 1px solid #CBD5E0;
+    box-shadow: 0 10px 30px rgba(26, 54, 93, 0.15);
     margin-bottom: 40px;
     display: flex;
     align-items: center;
@@ -31,7 +32,7 @@
 
 .profile-banner-text p {
     font-size: 0.95rem;
-    color: #F8F2EF;
+    color: #F4F5F7;
     opacity: 0.9;
 }
 
@@ -39,7 +40,7 @@
 .section-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.8rem;
-    color: #5C3640;
+    color: #1A365D;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -50,7 +51,7 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(to right, #8D6670, transparent);
+    background: linear-gradient(to right, #CBD5E0, transparent);
     margin-left: 10px;
 }
 
@@ -69,8 +70,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid rgba(141, 102, 112, 0.15);
-    border-left: 6px solid #7B4E57;
+    border: 1px solid #CBD5E0;
+    border-left: 6px solid #2B6CB0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -80,12 +81,13 @@
 }
 
 .appointment-card.past {
-    border-left-color: #B0A1A5;
-    background: #FAF8F7;
+    border: 1px solid #CBD5E0;
+    border-left: 6px solid #A0AEC0;
+    background: #EDF2F7;
 }
 
 .appointment-info h3 {
-    color: #6B3D49;
+    color: #1A365D;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem;
     margin-bottom: 10px;
@@ -103,12 +105,12 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #555;
+    color: #4A5568;
     font-size: 0.9rem;
 }
 
 .detail-item strong {
-    color: #333;
+    color: #2D3748;
 }
 
 /* Badges de estado */
@@ -124,15 +126,15 @@
 }
 
 .badge-upcoming {
-    background: #E8F5E9;
-    color: #2E7D32;
-    border: 1px solid #C8E6C9;
+    background: #E6FFFA;
+    color: #234E52;
+    border: 1px solid #B2F5EA;
 }
 
 .badge-completed {
-    background: #F0EDED;
-    color: #6D6D6D;
-    border: 1px solid #E0DADA;
+    background: #EDF2F7;
+    color: #718096;
+    border: 1px solid #CBD5E0;
 }
 
 /* Estado Vacío */
@@ -141,21 +143,21 @@
     padding: 45px 30px;
     border-radius: 18px;
     text-align: center;
-    color: #777;
-    border: 1px dashed #D6C7CB;
+    color: #718096;
+    border: 1.5px dashed #CBD5E0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
 }
 
 .empty-state p {
     font-size: 1rem;
-    color: #6B3D49;
+    color: #1A365D;
 }
 
 .btn-agendar-link {
     display: inline-block;
     margin-top: 15px;
     padding: 12px 28px;
-    background: #8D5664;
+    background: #2B6CB0;
     color: white;
     text-decoration: none;
     border-radius: 12px;
@@ -165,12 +167,12 @@
 }
 
 .btn-agendar-link:hover {
-    background: #6B3D49;
+    background: #1A365D;
     transform: translateY(-2px);
 }
 
 /* --------------------------------------------------
-   NUEVAS SECCIONES: RECOMENDACIONES, RUTINAS Y PRODUCTOS
+    NUEVAS SECCIONES: RECOMENDACIONES, RUTINAS Y PRODUCTOS
 -------------------------------------------------- */
 
 /* Grilla general de tarjetas dinámicas */
@@ -185,7 +187,7 @@
     background: white;
     border-radius: 18px;
     padding: 24px;
-    border: 1px solid rgba(141, 102, 112, 0.15);
+    border: 1px solid #CBD5E0;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
@@ -195,7 +197,7 @@
 
 .info-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(92, 54, 64, 0.1);
+    box-shadow: 0 12px 30px rgba(26, 54, 93, 0.1);
 }
 
 .info-card-header {
@@ -211,14 +213,14 @@
 
 .info-card h3 {
     font-family: 'Cormorant Garamond', serif;
-    color: #6B3D49;
+    color: #1A365D;
     font-size: 1.35rem;
     font-weight: 700;
 }
 
 .info-card p {
     font-size: 0.9rem;
-    color: #555;
+    color: #4A5568;
     line-height: 1.5;
 }
 
@@ -226,18 +228,18 @@
     display: inline-block;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #7B4E57;
-    background-color: #F8F2EF;
+    color: #2B6CB0;
+    background-color: #E2E8F0;
     padding: 6px 14px;
     border-radius: 20px;
     margin: 14px 0;
-    border: 1px solid rgba(123, 78, 87, 0.2);
+    border: 1px solid #CBD5E0;
 }
 
 .btn-card-action {
     display: block;
     text-align: center;
-    background-color: #7B4E57;
+    background-color: #2B6CB0;
     color: white;
     padding: 10px 18px;
     border-radius: 12px;
@@ -248,7 +250,7 @@
 }
 
 .btn-card-action:hover {
-    background-color: #5C3640;
+    background-color: #1A365D;
     transform: translateY(-2px);
 }
 
@@ -260,17 +262,16 @@
 }
 
 .routine-block {
-    background: #FAF8F7;
-    border-left: 5px solid #7B4E57;
+    background: #F4F5F7;
     padding: 24px;
     border-radius: 16px;
-    border: 1px solid rgba(141, 102, 112, 0.15);
-    border-left-width: 5px;
+    border: 1px solid #CBD5E0;
+    border-left: 5px solid #2B6CB0;
 }
 
 .routine-block h3 {
     font-family: 'Cormorant Garamond', serif;
-    color: #5C3640;
+    color: #1A365D;
     font-size: 1.4rem;
     font-weight: 700;
     margin-bottom: 12px;
@@ -278,13 +279,13 @@
 
 .routine-steps {
     padding-left: 18px;
-    color: #555;
+    color: #4A5568;
     font-size: 0.9rem;
     line-height: 1.7;
 }
 
 .routine-steps li strong {
-    color: #333;
+    color: #2D3748;
 }
 
 /* Tarjetas de Productos Cosméticos de Uso Diario */
@@ -292,7 +293,7 @@
     background: white;
     border-radius: 18px;
     padding: 24px;
-    border: 1px solid rgba(141, 102, 112, 0.15);
+    border: 1px solid #CBD5E0;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
@@ -302,7 +303,7 @@
 
 .product-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(92, 54, 64, 0.1);
+    box-shadow: 0 12px 30px rgba(26, 54, 93, 0.1);
 }
 
 .product-tag {
@@ -310,17 +311,18 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    color: #8D5664;
+    color: #2B6CB0;
     font-weight: 600;
     margin-bottom: 8px;
-    background-color: #FAF8F7;
+    background-color: #E2E8F0;
     padding: 4px 10px;
     border-radius: 8px;
+    border: 1px solid #CBD5E0;
 }
 
 .product-card h3 {
     font-family: 'Cormorant Garamond', serif;
-    color: #6B3D49;
+    color: #1A365D;
     font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 8px;
@@ -328,15 +330,15 @@
 
 .product-card p {
     font-size: 0.88rem;
-    color: #666;
+    color: #718096;
     line-height: 1.45;
 }
 
 .product-price {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #5C3640;
+    color: #1A365D;
     margin-top: 16px;
-    border-top: 1px dashed rgba(141, 102, 112, 0.2);
+    border-top: 1px dashed #CBD5E0;
     padding-top: 10px;
-}   
+}

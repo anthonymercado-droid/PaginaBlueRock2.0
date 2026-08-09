@@ -1,13 +1,13 @@
 :root {
-    --rojo-brand: #6B3D49;
-    --amarillo-brand: #7B4E57;
-    --gris-fondo: #F8F2EF;
+    --rojo-brand: #1A365D;       /* Azul Oscuro Principal */
+    --amarillo-brand: #2B6CB0;   /* Azul Acento / Botones */
+    --gris-fondo: #F4F5F7;       /* Fondo General */
     --blanco: #ffffff;
-    --texto-oscuro: #4A2F37;
-    --texto-mutado: #8D6670;
+    --texto-oscuro: #2D3748;     /* Texto Principal Oscuro */
+    --texto-mutado: #4A5568;     /* Texto Secundario / Enlaces */
     --borde-radio: 12px;
-}
- 
+} 
+
 /* 2. Reset profesional */
 * {
     box-sizing: border-box;
@@ -17,42 +17,59 @@
 }
 
 body {
-    background-color: var(--gris-fondo);
-    color: var(--texto-oscuro);
+    background-image: url(css/img/titulo.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-header{
-    width:90%;
-    margin:auto;
-    padding:30px 0;
+header {
+    width: 90%;
+    margin: auto;
+    padding: 30px 0;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.logo{
-    text-align:center;
+.logo {
+    text-align: center;
+    margin-bottom: 25px;
 }
 
 .logo a,
 .logo a:hover,
-.logo a:active{
-    color:#6B3D49;
-    text-decoration:none;
+.logo a:active {
+    color: #1A365D;
+    text-decoration: none;
 }
 
-.titulo-logo{
-    font-family:'Cormorant Garamond',serif;
-    font-size:50px;
-    color:#6B3D49;
+/* Contenedor flex para alinear el título y la imagen a la derecha */
+.logo-titulo-contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.titulo-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 45px;
+    color: #1A365D;
     border: 0;
+    line-height: 1;
 }
 
-.logo p{
-    letter-spacing:5px;
-    color:#8D6670;
-    font-size:14px;
+.imagen-logo-derecha {
+    height: 38px; /* Tamaño ajustado para la tarjeta de inicio de sesión */
+    width: auto;
+    object-fit: contain;
+}
+
+.logo p {
+    letter-spacing: 5px;
+    color: #4A5568;
+    font-size: 14px;
 }
 
 /* 3. Contenedor Principal (El Padre Flex) */
@@ -71,7 +88,8 @@ header{
     max-width: 400px; /* Evita que se estire demasiado en pantallas de computadora */
     padding: 40px 30px;
     border-radius: var(--borde-radio);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #CBD5E0;
+    box-shadow: 0 4px 15px rgba(26, 54, 93, 0.08);
 }
 
 .login-header {
@@ -88,9 +106,8 @@ header{
     color: var(--rojo-brand);
     font-size: 2.8rem;
     margin-bottom: 5px;
-    font-family:'Cormorant Garamond',serif;
+    font-family: 'Cormorant Garamond', serif;
 }
-
 
 /* 5. Grupos de Formulario (Inputs y Labels) */
 .form-group {
@@ -109,7 +126,7 @@ header{
 .form-group input {
     width: 100%;
     padding: 12px 16px;
-    border: 1px solid #cccccc;
+    border: 1px solid #CBD5E0;
     border-radius: 6px;
     font-size: 1rem;
     transition: border-color 0.2s;
@@ -118,13 +135,15 @@ header{
 /* Efecto Focus para mejorar la UX */
 .form-group input:focus {
     outline: none;
-    border-color: var(--rojo-brand);
+    border-color: var(--amarillo-brand);
 }
 
 /* Enlaces y acciones secundarias */
 .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 25px;
-    text-align: right;
 }
 
 .forgot-password {
@@ -144,11 +163,16 @@ header{
     text-decoration: none;
 }
 
+.Registrate:hover {
+    text-decoration: underline;
+    color: var(--rojo-brand);
+}
+
 /* 6. Botón Principal */
 .btn-submit {
     width: 100%;
     background-color: var(--amarillo-brand);
-    color: var(--texto-oscuro);
+    color: #ffffff;
     border: none;
     padding: 14px;
     font-size: 1rem;
@@ -159,7 +183,7 @@ header{
 }
 
 .btn-submit:hover {
-    background-color: #f9a825; /* Un tono amarillo ligeramente más oscuro */
+    background-color: #1A365D; /* Tono azul más oscuro al pasar el cursor */
 }
 
 .btn-submit:active {

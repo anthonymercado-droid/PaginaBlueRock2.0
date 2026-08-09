@@ -1,13 +1,13 @@
 :root {
-    --rojo-brand: #6B3D49;
-    --amarillo-brand: #7B4E57;
-    --gris-fondo: #F8F2EF;
+    --rojo-brand: #1A365D;       /* Azul Oscuro Principal */
+    --amarillo-brand: #2B6CB0;   /* Azul Acento / Botones */
+    --gris-fondo: #F4F5F7;       /* Fondo General */
     --blanco: #ffffff;
-    --texto-oscuro: #4A2F37;
-    --texto-mutado: #8D6670;
+    --texto-oscuro: #2D3748;     /* Texto Principal Oscuro */
+    --texto-mutado: #4A5568;     /* Texto Secundario */
     --borde-radio: 12px;
 }
-
+ 
 /* =========================
         RESET
 ========================= */
@@ -32,190 +32,194 @@ body {
         HEADER
 ========================= */
 
-header{
-    width:90%;
-    margin:auto;
-    padding:30px 0;
+header {
+    width: 90%;
+    margin: auto;
+    padding: 30px 0;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.logo{
-    text-align:center;
+.logo {
+    text-align: center;
 }
 
 .logo a,
 .logo a:hover,
-.logo a:active{
-    color:#6B3D49;
-    text-decoration:none;
+.logo a:active {
+    color: #1A365D;
+    text-decoration: none;
 }
 
-.titulo-logo{
-    font-family:'Cormorant Garamond',serif;
-    font-size:70px;
-    color:#6B3D49;
+.titulo-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 70px;
+    color: #1A365D;
     border: 0;
 }
 
-.logo p{
-    letter-spacing:5px;
-    color:#8D6670;
-    font-size:14px;
+.logo p {
+    letter-spacing: 5px;
+    color: #4A5568;
+    font-size: 14px;
 }
 
 /* =========================
     BOTONES HEADER
 ========================= */
 
-.btn-header{
-    padding:14px 28px;
-    border:2px solid #8D6670;
-    background:transparent;
-    border-radius:12px;
-    font-size:18px;
-    cursor:pointer;
-    transition:.3s;
+.btn-header {
+    padding: 14px 28px;
+    border: 2px solid #CBD5E0;
+    background: transparent;
+    border-radius: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .3s;
 }
 
-.btn-header:hover{
-    transform:translateY(-3px);
+.btn-header:hover {
+    transform: translateY(-3px);
+    border-color: #2B6CB0;
+    background-color: rgba(43, 108, 176, 0.08);
 }
 
-.btn-header a{
-    color:#6B3D49;
-    text-decoration:none;
+.btn-header a {
+    color: #1A365D;
+    text-decoration: none;
 }
 
-.btn-login{
-    padding:14px 28px;
-    background:#7B4E57;
-    border:2px solid #8D6670;
-    border-radius:12px;
-    font-size:18px;
-    cursor:pointer;
-    transition:.3s;
+.btn-login {
+    padding: 14px 28px;
+    background: #2B6CB0;
+    border: 2px solid #2B6CB0;
+    border-radius: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .3s;
 }
 
-.btn-login:hover{
-    transform:translateY(-3px);
+.btn-login:hover {
+    background: #1A365D;
+    border-color: #1A365D;
+    transform: translateY(-3px);
 }
 
-.btn-login a{
-    color:white;
-    text-decoration:none;
+.btn-login a {
+    color: white;
+    text-decoration: none;
 }
 
 /* =========================
     CONTENEDOR LOGIN
 ========================= */
 
-.login-container{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    padding:20px;
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 /* =========================
         TARJETA
 ========================= */
 
-.login-card{
-    background:var(--blanco);
-    width:100%;
-    max-width:420px;
-    padding:40px 35px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.12);
+.login-card {
+    background: var(--blanco);
+    width: 100%;
+    max-width: 420px;
+    padding: 40px 35px;
+    border-radius: 20px;
+    border: 1px solid #CBD5E0;
+    box-shadow: 0 10px 30px rgba(26, 54, 93, 0.08);
 }
 
 /* =========================
     ENCABEZADO LOGIN
 ========================= */
 
-.login-header{
-    text-align:center;
+.login-header {
+    text-align: center;
 }
-
 
 /* =========================
         FORMULARIO
 ========================= */
 
-.form-group{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    margin-bottom:20px;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
-.form-group label{
-    font-size:.9rem;
-    font-weight:600;
-    color:var(--texto-oscuro);
+.form-group label {
+    font-size: .9rem;
+    font-weight: 600;
+    color: var(--texto-oscuro);
 }
 
-.form-group input{
-    width:100%;
-    padding:13px 16px;
-    border:2px solid #E8D8D9;
-    border-radius:10px;
-    font-size:1rem;
-    transition:.3s;
+.form-group input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 2px solid #CBD5E0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: .3s;
 }
 
-.form-group input:focus{
-    outline:none;
-    border-color:var(--amarillo-brand);
-    box-shadow:0 0 8px rgba(123,78,87,.18);
+.form-group input:focus {
+    outline: none;
+    border-color: var(--amarillo-brand);
+    box-shadow: 0 0 8px rgba(43, 108, 176, 0.18);
 }
 
 /* =========================
     ENLACE CONTRASEÑA
 ========================= */
 
-.form-actions{
-    margin-bottom:25px;
-    text-align:right;
+.form-actions {
+    margin-bottom: 25px;
+    text-align: right;
 }
 
-.forgot-password{
-    color:var(--rojo-brand);
-    text-decoration:none;
-    font-size:.9rem;
+.forgot-password {
+    color: var(--rojo-brand);
+    text-decoration: none;
+    font-size: .9rem;
 }
 
-.forgot-password:hover{
-    color:var(--amarillo-brand);
-    text-decoration:underline;
+.forgot-password:hover {
+    color: var(--amarillo-brand);
+    text-decoration: underline;
 }
 
 /* =========================
         BOTÓN
 ========================= */
 
-.btn-submit{
-    width:100%;
-    background:var(--amarillo-brand);
-    color:white;
-    border:none;
-    padding:14px;
-    font-size:1rem;
-    font-weight:bold;
-    border-radius:10px;
-    cursor:pointer;
-    transition:.3s;
+.btn-submit {
+    width: 100%;
+    background: var(--amarillo-brand);
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
 }
 
-.btn-submit:hover{
-    background:var(--rojo-brand);
-    transform:translateY(-2px);
+.btn-submit:hover {
+    background: var(--rojo-brand);
+    transform: translateY(-2px);
 }
 
-.btn-submit:active{
-    transform:scale(.98);
+.btn-submit:active {
+    transform: scale(.98);
 }

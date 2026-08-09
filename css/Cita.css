@@ -2,14 +2,14 @@
    VARIABLES DE COLOR Y PALETA BLUE ROCK
    =================================================== */
 :root {
-    --bg-main: #F8F2EF;      
-    --card-bg: #FFFFFF;       
-    --header-bg: #FAF5F6;     
-    --header-text: #6B3D49;   
-    --text-color: #55333B;      
-    --text-muted: #8D6670;      
-    --accent-color: #7B4E57;   
-    --border-color: #D3C2C4;    
+    --bg-main: #F2F6FC;        /* Fondo claro azulado */
+    --card-bg: #FFFFFF;        /* Blanco para tarjetas principales */
+    --header-bg: #E8EEF7;      /* Azul muy claro para fondos secundarios/tarjetas internas */
+    --header-text: #1D4373;    /* Azul marino oscuro para encabezados y textos principales */
+    --text-color: #2C4D75;      /* Azul oscuro para texto general */
+    --text-muted: #6B82A0;      /* Azul grisáceo para texto secundario */
+    --accent-color: #3164A3;    /* Azul institucional para botones principales y acentos */
+    --border-color: #D0DCED;    /* Azul suave para bordes y separadores */
 }
 
 /* ===================================================
@@ -69,7 +69,7 @@ header p {
     width: 100%;
     padding: 40px;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(107, 61, 73, 0.08);
+    box-shadow: 0 10px 30px rgba(29, 67, 115, 0.08);
 }
 
 .booking-header {
@@ -126,14 +126,12 @@ header p {
 /* ===================================================
    GRILLAS (SERVICIOS Y FECHA/HORA)
    =================================================== */
-/* Muestra las tarjetas de servicios de 2 en 2 */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
 }
 
-/* Coloca la fecha arriba y los horarios abajo */
 .datetime-grid {
     display: flex;
     flex-direction: column;
@@ -146,7 +144,11 @@ header p {
     }
 
     .services-grid {
-        grid-template-columns: 1fr; /* En celulares pasa a 1 sola columna */
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-options {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -154,7 +156,8 @@ header p {
    OCULTAR INPUTS NATIVOS (CHECKBOX Y RADIO)
    =================================================== */
 .service-card input[type="checkbox"],
-.time-chip input[type="radio"] {
+.time-chip input[type="radio"],
+.payment-chip input[type="radio"] {
     position: absolute;
     opacity: 0;
     width: 0;
@@ -198,11 +201,10 @@ header p {
     color: var(--text-muted);
 }
 
-/* Estado Seleccionado de Tarjetas */
 .service-card:has(input[type="checkbox"]:checked) {
     border-color: var(--accent-color);
     background-color: var(--header-bg);
-    box-shadow: 0 4px 12px rgba(123, 78, 87, 0.15);
+    box-shadow: 0 4px 12px rgba(49, 100, 163, 0.15);
 }
 
 .service-card:has(input[type="checkbox"]:checked) .service-title {
@@ -263,8 +265,85 @@ input[type="date"]:focus {
     border-color: var(--accent-color);
 }
 
-/* Estado Seleccionado de Horarios */
 .time-chip:has(input[type="radio"]:checked) span {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* ESTILO HORA OCUPADA DESHABILITADA */
+.time-chip.hora-ocupada span,
+.time-chip:has(input[type="radio"]:disabled) span {
+    background-color: #EBF0F7;
+    color: #A0B2C6;
+    border-color: #D6E0EE;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+/* ===================================================
+   RESUMEN Y MÉTODOS DE PAGO
+   =================================================== */
+.summary-section {
+    background-color: var(--header-bg);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1.5px solid var(--border-color);
+}
+
+.summary-details {
+    margin-bottom: 16px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.92rem;
+    color: var(--text-color);
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--header-text);
+    border-top: 1.5px solid var(--border-color);
+    padding-top: 12px;
+    margin-top: 12px;
+}
+
+.payment-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.payment-chip {
+    cursor: pointer;
+    user-select: none;
+}
+
+.payment-chip span {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border: 1.5px solid var(--border-color);
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+}
+
+.payment-chip:hover span {
+    border-color: var(--accent-color);
+}
+
+.payment-chip:has(input[type="radio"]:checked) span {
     background-color: var(--accent-color);
     color: white;
     border-color: var(--accent-color);
@@ -294,6 +373,104 @@ input[type="date"]:focus {
 }
 
 .btn-submit:disabled {
-    background-color: #D3C2C4;
+    background-color: #C0CDE0;
     cursor: not-allowed;
+}
+
+/* ===================================================
+   MODAL DE OFERTA DE TIENDA
+   =================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(29, 67, 115, 0.4);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    background: var(--card-bg);
+    padding: 35px 28px;
+    border-radius: 16px;
+    max-width: 440px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(29, 67, 115, 0.18);
+    border: 1px solid var(--border-color);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-card {
+    transform: translateY(0);
+}
+
+.modal-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--header-text);
+    margin-bottom: 12px;
+}
+
+.modal-card p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-modal-primary {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+} 
+
+.btn-modal-primary:hover {
+    background-color: var(--header-text);
+    transform: translateY(-2px);
+}
+
+.btn-modal-secondary {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1.5px solid var(--border-color);
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.btn-modal-secondary:hover {
+    background-color: var(--header-bg);
+    color: var(--header-text);
 }

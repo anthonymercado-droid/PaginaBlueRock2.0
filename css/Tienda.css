@@ -1,19 +1,21 @@
 /* ==========================================
-   VARIABLES DE COLOR
+   VARIABLES DE COLOR (PALETA AZUL Y GRIS)
    ========================================== */
 :root {
-    --rojo-brand: #6B3D49;
-    --amarillo-brand: #7B4E57;
-    --gris-fondo: #F8F2EF;
+    --rojo-brand: #1A365D;       /* Azul Oscuro Principal */
+    --amarillo-brand: #2B6CB0;   /* Azul Acento / Botones */
+    --gris-fondo: #F4F5F7;       /* Fondo General */
     --blanco: #ffffff;
-    --texto-oscuro: #4A2F37;
-    --texto-mutado: #8D6670;
+    --texto-oscuro: #2D3748;     /* Texto Principal Oscuro */
+    --texto-mutado: #4A5568;     /* Texto Secundario */
+    --borde-color: #CBD5E0;      /* Bordes */
+    --borde-radio: 12px;
 }
 
 /* ==========================================
    RESET & ESTILOS BASE DE LA TIENDA
    ========================================== */
-* {
+* { 
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -90,10 +92,10 @@ header {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    z-index: 990; /* Por encima del catálogo pero por debajo del sidebar */
+    z-index: 990;
     background-color: var(--amarillo-brand);
     color: var(--blanco);
-    border: 1px solid var(--texto-mutado);
+    border: 1px solid var(--borde-color);
     padding: 12px 22px;
     border-radius: 30px;
     font-family: 'Poppins', sans-serif;
@@ -103,14 +105,14 @@ header {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    box-shadow: 0 6px 18px rgba(107, 61, 73, 0.25);
+    box-shadow: 0 6px 18px rgba(26, 54, 93, 0.25);
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .cart-icon-btn:hover {
     background-color: var(--rojo-brand);
     transform: translateY(-3px);
-    box-shadow: 0 8px 22px rgba(107, 61, 73, 0.35);
+    box-shadow: 0 8px 22px rgba(26, 54, 93, 0.35);
 }
 
 #cart-count {
@@ -168,16 +170,16 @@ header {
     background-color: var(--blanco);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 16px rgba(107, 61, 73, 0.08);
+    box-shadow: 0 4px 16px rgba(26, 54, 93, 0.08);
     display: flex;
     flex-direction: column;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: 1px solid rgba(141, 102, 112, 0.2);
+    border: 1px solid var(--borde-color);
 }
 
 .product-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(107, 61, 73, 0.16);
+    box-shadow: 0 8px 24px rgba(26, 54, 93, 0.16);
 }
 
 .product-image-wrap {
@@ -230,7 +232,7 @@ header {
     align-items: center;
     margin-top: auto;
     padding-top: 12px;
-    border-top: 1px solid rgba(141, 102, 112, 0.2);
+    border-top: 1px solid var(--borde-color);
 }
 
 .product-price {
@@ -270,7 +272,7 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(74, 47, 55, 0.4);
+    background: rgba(26, 54, 93, 0.4);
     backdrop-filter: blur(2px);
     opacity: 0;
     visibility: hidden;
@@ -291,7 +293,7 @@ header {
     max-width: 380px;
     height: 100%;
     background-color: var(--blanco);
-    box-shadow: -4px 0 20px rgba(107, 61, 73, 0.15);
+    box-shadow: -4px 0 20px rgba(26, 54, 93, 0.15);
     z-index: 999;
     display: flex;
     flex-direction: column;
@@ -307,7 +309,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(141, 102, 112, 0.2);
+    border-bottom: 1px solid var(--borde-color);
     background-color: var(--gris-fondo);
 }
 
@@ -350,7 +352,7 @@ header {
     align-items: center;
     gap: 12px;
     margin-bottom: 16px;
-    border-bottom: 1px solid rgba(141, 102, 112, 0.2);
+    border-bottom: 1px solid var(--borde-color);
     padding-bottom: 12px;
 }
 
@@ -388,7 +390,7 @@ header {
 
 .cart-quantity-controls button {
     background: var(--gris-fondo);
-    border: 1px solid rgba(141, 102, 112, 0.3);
+    border: 1px solid var(--borde-color);
     color: var(--rojo-brand);
     width: 26px;
     height: 26px;
@@ -402,7 +404,7 @@ header {
 }
 
 .cart-quantity-controls button:hover {
-    background: rgba(141, 102, 112, 0.2);
+    background: rgba(203, 213, 224, 0.4);
 }
 
 .cart-quantity-controls span {
@@ -421,12 +423,12 @@ header {
 }
 
 .btn-remove:hover {
-    color: #A94442;
+    color: #E53E3E;
 }
 
 .cart-footer {
     padding: 20px;
-    border-top: 1px solid rgba(141, 102, 112, 0.2);
+    border-top: 1px solid var(--borde-color);
     background-color: var(--gris-fondo);
 }
 
@@ -466,7 +468,7 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(74, 47, 55, 0.5);
+    background: rgba(26, 54, 93, 0.5);
     backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
@@ -474,7 +476,7 @@ header {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 1000; /* Por encima de la barra lateral del carrito */
+    z-index: 1000;
 }
 
 .modal-overlay.active {
@@ -488,8 +490,8 @@ header {
     border-radius: 12px;
     width: 90%;
     max-width: 420px;
-    box-shadow: 0 10px 25px rgba(107, 61, 73, 0.2);
-    border: 1px solid rgba(141, 102, 112, 0.2);
+    box-shadow: 0 10px 25px rgba(26, 54, 93, 0.2);
+    border: 1px solid var(--borde-color);
     transform: translateY(-20px);
     transition: transform 0.3s ease;
 }
@@ -523,7 +525,7 @@ header {
     align-items: center;
     gap: 12px;
     padding: 12px 16px;
-    border: 1px solid rgba(141, 102, 112, 0.3);
+    border: 1px solid var(--borde-color);
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease, border-color 0.2s ease;
@@ -580,5 +582,92 @@ header {
 }
 
 .btn-confirm:hover {
+    background-color: var(--rojo-brand);
+}
+
+/* ==========================================
+   NUEVO ESPACIO AL FINAL DE LA CITA:
+   COMPRA / ADICIÓN DE PRODUCTOS A LA CITA
+   ========================================== */
+.appointment-products-section {
+    width: 100%;
+    max-width: 1000px;
+    margin: 40px auto 20px auto;
+    padding: 30px;
+    background-color: var(--blanco);
+    border: 1px solid var(--borde-color);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(26, 54, 93, 0.08);
+}
+
+.appointment-products-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.appointment-products-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--rojo-brand);
+    margin-bottom: 6px;
+}
+
+.appointment-products-header p {
+    font-size: 0.95rem;
+    color: var(--texto-mutado);
+}
+
+.appointment-products-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.appointment-product-item {
+    background-color: var(--gris-fondo);
+    border: 1px solid var(--borde-color);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.appointment-product-item:hover {
+    border-color: var(--amarillo-brand);
+    transform: translateY(-2px);
+}
+
+.appointment-product-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--rojo-brand);
+    margin-bottom: 4px;
+}
+
+.appointment-product-price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--amarillo-brand);
+    margin-bottom: 12px;
+}
+
+.appointment-product-add-btn {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: var(--amarillo-brand);
+    color: var(--blanco);
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.appointment-product-add-btn:hover {
     background-color: var(--rojo-brand);
 }

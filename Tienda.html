@@ -10,7 +10,7 @@
     <title>Blue Rock - Tienda</title>
 </head>
 <body>
-
+<img src="css/img/titulo.png" width="100%" height="100%" style="position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.2;">  
     <header>
         <div class="logo">
             <a href="index.html">  
@@ -77,6 +77,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { 
         getFirestore, 
         collection, 
@@ -99,10 +100,19 @@
     };
 
     const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
     const db = getFirestore(app);
 
     let productosCache = [];
     let carrito = JSON.parse(localStorage.getItem('cart_bluerock')) || [];
+    let usuarioActual = null;
+
+    // Escuchar el estado de autenticación para obtener el ID del cliente
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            usuarioActual = user;
+        }
+    });
 
     // 1. Cargar productos desde Firestore
     async function cargarProductos() {
@@ -255,7 +265,7 @@
         totalLabel.textContent = `$${totalAcumulado.toFixed(2)}`;
     }
 
-    // 3. Proceso de Pago, Guardado en Firestore ('citas') y Reducción de Stock
+    // 3. Proceso de Pago y Guardado en Firestore ('detalleProducto')
     window.procesarCompra = function() {
         if (carrito.length === 0) return;
         document.getElementById('payment-modal').classList.add('active');
@@ -273,7 +283,10 @@
         const metodoPago = document.querySelector('input[name="metodo_pago"]:checked').value;
         const totalCalculado = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
 
-        // Desglose de los productos a llevar
+        // Obtener IDs para la relación en detalleProducto
+        const idCliente = usuarioActual ? usuarioActual.uid : "";
+        const idCompra = sessionStorage.getItem("citaIdActual") || "";
+
         const productosLlevar = carrito.map(item => ({
             id: item.id,
             nombre: item.nombre,
@@ -282,8 +295,10 @@
         }));
 
         try {
-            // 1. Guardar documento en la colección "citas"
-            await addDoc(collection(db, "citas"), {
+            // 1. Guardar el pedido en la colección "detalleProducto"
+            await addDoc(collection(db, "detalleProducto"), {
+                idCliente: idCliente,
+                idCompra: idCompra,
                 productos: productosLlevar,
                 metodoPago: metodoPago,
                 total: totalCalculado,
@@ -291,7 +306,7 @@
                 fechaCreacion: serverTimestamp()
             });
 
-            // 2. Reducir el stock de cada producto comprado en la colección "productos"
+            // 2. Reducir el stock de cada producto en la colección "productos"
             const promesasStock = carrito.map(item => {
                 const productoRef = doc(db, "productos", item.id);
                 return updateDoc(productoRef, {
@@ -299,12 +314,11 @@
                 });
             });
 
-            // Esperar a que se actualicen todos los stocks en Firestore
             await Promise.all(promesasStock);
 
             alert(`¡Pedido registrado exitosamente!\nMétodo de pago seleccionado: ${metodoPago}`);
 
-            // 3. Resetear carrito, modales y recargar catálogo con los nuevos stocks
+            // 3. Limpiar carrito y recargar productos
             carrito = [];
             guardarYActualizar();
             cerrarModalPago();

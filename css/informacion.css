@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap');
 
 :root {
-    --bg-body: #F8F2EF;
+    --bg-body: #F4F5F7;
     --card-bg: #FFFFFF;
-    --text-color: #4A3B3E;
-    --header-text: #6B3D49;
-    --header-bg: #F0E6E5;
-    --accent-color: #7B4E57;
-    --border-color: #D3C2C4;
+    --text-color: #2D3748;
+    --header-text: #1A365D;
+    --header-bg: #E2E8F0;
+    --accent-color: #2B6CB0;
+    --border-color: #CBD5E0;
 }
-
+ 
 * {
     box-sizing: border-box;
     margin: 0;
@@ -37,7 +37,7 @@ body {
 .logo a,
 .logo a:hover,
 .logo a:active {
-    color: #6B3D49;
+    color: var(--header-text);
     border-bottom: none;
     text-decoration: none;
 }
@@ -45,14 +45,14 @@ body {
 .titulo-logo {
     font-family: 'Cormorant Garamond', serif;
     font-size: 70px;
-    color: #6B3D49;
+    color: var(--header-text);
     border: 0;
     line-height: 1;
 }
 
 .logo p {
     letter-spacing: 5px;
-    color: #8D6670;
+    color: #4A5568;
     font-size: 14px;
     margin-top: 5px;
     margin-bottom: 30px;
