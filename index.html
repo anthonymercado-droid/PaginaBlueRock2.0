@@ -24,10 +24,13 @@
         </button>
     </div>
 
-    <!-- 2. Centro: Logo Blue Rock -->
+    <!-- 2. Centro: Logo Blue Rock + Imagen a la Derecha -->
     <div class="logo">
         <a href="index.html">  
-            <h1 class="titulo-logo">Blue Rock</h1>
+            <div class="logo-titulo-contenedor">
+                <h1 class="titulo-logo">Blue Rock</h1>
+                <img src="css/img/titulo.png" alt="Logo Blue Rock" class="imagen-logo-derecha">
+            </div>
         </a>
         <p>BELLEZA • CONFIANZA • BIENESTAR</p>
     </div>
@@ -123,7 +126,6 @@
     // Escuchar el estado de autenticación
     onAuthStateChanged(auth, async (user) => {
         if (user) {
-            // CON SESIÓN: Mostramos "Mis Citas" a la izquierda y el Panel de Usuario a la derecha
             btnRegistrarse.style.display = "none";
             btnMisCitas.style.display = "block";
             btnLoginHeader.style.display = "none";
@@ -145,7 +147,6 @@
             }
 
         } else {
-            // SIN SESIÓN: Mostramos Registrarse a la izquierda e Iniciar Sesión a la derecha
             btnRegistrarse.style.display = "block";
             btnMisCitas.style.display = "none";
             btnLoginHeader.style.display = "block";

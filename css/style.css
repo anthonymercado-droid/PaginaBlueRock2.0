@@ -10,7 +10,7 @@ body {
     font-family: 'Poppins', sans-serif;
     color: #2D3748;
 }
- 
+
 /* --------------------------------------------------
     HEADER Y NAVEGACIÓN
 -------------------------------------------------- */
@@ -54,12 +54,26 @@ header {
     text-decoration: none;
 }
 
+/* Contenedor flex para alinear el título y la imagen a la derecha */
+.logo-titulo-contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Espacio entre el texto y la imagen */
+}
+
 .titulo-logo {
     font-family: 'Cormorant Garamond', serif;
     font-size: 70px;
     color: #1A365D;
     border: 0;
     line-height: 1;
+}
+
+.imagen-logo-derecha {
+    height: 55px; /* Altura proporcional para alinearse con las letras */
+    width: auto;
+    object-fit: contain;
 }
 
 .logo p {
